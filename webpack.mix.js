@@ -10,6 +10,20 @@ const mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
+mix.webpackConfig({
+    module: {
+        rules: [
+            {
+                enforce: 'pre',
+                exclude: /node_modules/,
+                loader: 'eslint-loader',
+                test: /\.(js|vue)?$/
+            }
+        ]
+    }
+})
 
-mix.js('resources/js/app.js', 'public/js')
+
+
+mix.babel(['resources/js/app.js'], 'public/js/app.js')
     .sass('resources/sass/app.scss', 'public/css');

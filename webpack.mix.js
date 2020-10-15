@@ -23,7 +23,5 @@ mix.webpackConfig({
     }
 })
 
-
-
 mix.babel(['resources/js/app.js'], 'public/js/app.js')
     .sass('resources/sass/app.scss', 'public/css');

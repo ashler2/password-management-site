@@ -17,7 +17,16 @@
 <script>
     export default {
         mounted() {
-            console.log('Component mounted.');
+            console.log(testData?.testField);
+            console.log(testData2?.testField2);
+        },
+        data(){
+            return {
+                testData: {
+                    testField: 'string',
+                },
+                testData2: null
+            };
         }
     };
 </script>

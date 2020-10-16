@@ -15,8 +15,9 @@ class UserTest extends TestCase
      */
     public function testExample()
     {
-        $response = $this->get('/');
-
+        $response = $this->get('/register');
         $response->assertStatus(200);
+        $post = $this->post('/register',['name' =>  'test', 'email' =>  'password']);
+        $post->assertStatus(200);
     }
 }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
+use App\Models\Password;
 
 class PasswordController extends Controller
 {
@@ -13,7 +15,9 @@ class PasswordController extends Controller
      */
     public function index()
     {
-        //
+        return view('home')->with([
+            'passwords' =>  Password::all()
+        ]);
     }
 
     /**
@@ -23,7 +27,7 @@ class PasswordController extends Controller
      */
     public function create()
     {
-        //
+        return view('password.create');
     }
 
     /**
@@ -34,7 +38,15 @@ class PasswordController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Valiadate Data
+        $password = Password::create([
+            'name'      =>  $request['password_name'],
+            'login'     =>  Crypt::encryptString($request['login']),      
+            'password'  =>  Crypt::encryptString($request['password'])
+        ]);
+        // return error page if nothing happened
+        return $password ?  view('home') : null;
+
     }
 
     /**
@@ -43,9 +55,9 @@ class PasswordController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Password $password)
     {
-        //
+        return view('password.show', $password);
     }
 
     /**
@@ -56,7 +68,7 @@ class PasswordController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view("password.edit", $id);
     }
 
     /**
@@ -79,6 +91,7 @@ class PasswordController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $password = Password::where('id', $id)->delete();
+        return $password ? 'something' : 'something else';
     }
 }

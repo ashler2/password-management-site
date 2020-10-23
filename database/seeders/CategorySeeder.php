@@ -14,8 +14,9 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        Category::create(['name' => 'Dev', 'screen_name'    =>  'dev']);
-        Category::create(['name' => 'Social', 'screen_name' =>  'social']);
-        Category::create(['name' => 'Other', 'screen_name'  =>  'other']);
+
+        Category::create(['screen_name' => 'Dev', 'name'    =>  'dev']);
+        Category::create(['screen_name' => 'Social', 'name' =>  'social']);
+        Category::create(['screen_name' => 'Other', 'name'  =>  'other']);
     }
 }

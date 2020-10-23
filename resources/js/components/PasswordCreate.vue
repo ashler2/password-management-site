@@ -21,11 +21,9 @@
         },
         data(){
             return {
-                testData: {
-                    testField: 'string',
-                },
-                testData2: null
+
             };
-        }
+        },
+    
     };
 </script>

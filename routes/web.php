@@ -20,9 +20,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [PasswordController::class, 'index'])->name('home');
+// Route::get('/home', [PasswordController::class, 'index'])->name('home');
 
-Route::middleware('auth')->group(function () {
-    Route::resource('/passwords',PasswordController::class);
+// Route::middleware('auth')->group(function () {
+//     Route::resource('/passwords',PasswordController::class);
 
-});
+// });
+Route::get('/{any}', [PasswordController::class, 'index'])->where('any', '.*');

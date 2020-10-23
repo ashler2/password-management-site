@@ -8,10 +8,7 @@
 
                 <div class="card-body">
 
-                    <router-link herf="" class="" v-for="(password, index) in passwords" :key="index">
-                        <h4 class="">{{password.website}}</h4>
-                        <h5>{{password.login}}</h5>
-                    </router-link>
+                    <password-card v-for="(password, index) in passwords" :password="password" :key="index"></password-card>
                     
                 </div>
             </div>

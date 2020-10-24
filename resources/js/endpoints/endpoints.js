@@ -8,5 +8,7 @@ export const GET_PASSWORDS = `${API_URL}/passwords`;
 
 export const GET_PASSWORD = (password) => `${API_URL}/passwords/${password}`;
 
+export const POST_PASSWORD = `${API_URL}/passwords`;
+
 // Categories
 export const GET_CATEGORIES = `${API_URL}/categories`;

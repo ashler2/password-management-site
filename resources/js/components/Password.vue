@@ -4,7 +4,7 @@
             <div class="col-md-12">
                 <div class="card">
 
-                     <form method="POST" action="">
+                    <form method="POST" action="">
 
                         <div class="form-group row">
                             <label for="password_email" class="col-md-4 col-form-label text-md-right">Email</label>
@@ -47,10 +47,6 @@
                             </div>
                         </div>
 
-                        
-                        <button type="submit" class="btn btn-primary">
-                            Create Password
-                        </button>
                     </form>
                    
                 </div>

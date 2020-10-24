@@ -14,7 +14,12 @@ class Password extends Model
     protected $fillable = [
         'name',
         'login',
+        'email',
         'password',
+        'website',
+        'notes',
+        'category_id',
+        'password_length'
     ];
     protected $hidden = ["password"];
 

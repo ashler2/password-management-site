@@ -18,11 +18,18 @@ import axios from 'axios';
 import {GET_CATEGORIES} from '../endpoints/endpoints';
 export default {
     props: {
-        currentCategory: Number
+        currentCategory: {
+            type: Number, 
+            required: true,
+            default: 1
+        }
     },
     data () {
         return {
-            categories: []
+            categories: [],
+            current: {
+
+            }
         };
     },
     methods: {
@@ -30,10 +37,25 @@ export default {
             axios.get(GET_CATEGORIES).then(({data: {data}}) => {
                 this.categories = data;
             });
+        },
+        getCurrentCategory(){
+            this.current = this.categories.filter(category => {
+                console.log(category);
+                if(category.id === this.currentCategoryId){
+                    return category;
+                };
+            });
         }
     },
     mounted () {
         this.getCategories();
-    }
+        this.getCurrentCategory();
+
+    },
+    computed : {
+        currentCategoryId: function () {
+            return this.currentCategory;
+        }
+    } 
 };
 </script>

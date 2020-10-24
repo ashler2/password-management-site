@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Password;
 use App\Http\Resources\Password as PasswordResource;
 use App\Http\Resources\Passwords;
+use Illuminate\Support\Facades\Crypt;
+
 
 class PasswordController extends Controller
 {
@@ -29,6 +31,16 @@ class PasswordController extends Controller
      */
     public function store(Request $request)
     {
+        $a = Password::create([
+            'name'  =>  $request->name,
+            'password'  =>  Crypt::encryptString($request->password),
+            'email' => $request->email,
+            'login' =>  $request->login,
+            "password_length"   => Crypt::encryptString(strlen($request->password))
+        ]);
+        return $a ? response('success', 201) : response('error',500);
+
+
     }
 
     /**

@@ -2,8 +2,12 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header" style="position: relative;">
                     <h4>Passwords</h4>
+                    <button @click="toggleCreatePassword">
+                        Create Password
+                    </button>
+                        <password-create :currentDisplay="createPassword"></password-create>
                 </div>
 
                 <div class="card-body">
@@ -22,7 +26,8 @@ import {GET_PASSWORDS} from '../endpoints/endpoints';
 export default {
     data () {
         return {
-            passwords: []
+            passwords: [],
+            createPassword: false
         };
     }, 
     mounted () {
@@ -33,6 +38,9 @@ export default {
             axios.get(GET_PASSWORDS).then(({data: {data}}) => {
                 this.passwords = data;
             });
+        },
+        toggleCreatePassword () {
+            this.createPassword = !this.createPassword;
         }
     }
 };

@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Category;
+use App\Models\User;
+
 
 class Password extends Model
 {
@@ -25,5 +27,9 @@ class Password extends Model
 
     public function Category () {
         return $this->hasOne(Category::class);
+    }
+
+    public function Users() {
+        return $this->belongsToMany(User::class);
     }
 }

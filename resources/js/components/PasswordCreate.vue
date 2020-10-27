@@ -63,8 +63,9 @@
         methods: {
             createPassword() {
                 axios.post(POST_PASSWORD, this.form).then(res => {
-                    console.log(res);
-                })
+                    res.status === 201 ? this.$parent.toggleCreatePassword() : alert('error');
+                    this.$parent.getPasswords();
+                });
             }
         }
     

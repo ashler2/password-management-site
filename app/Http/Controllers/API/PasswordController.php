@@ -8,6 +8,7 @@ use App\Models\Password;
 use App\Http\Resources\Password as PasswordResource;
 use App\Http\Resources\Passwords;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Auth;
 
 
 class PasswordController extends Controller
@@ -19,6 +20,7 @@ class PasswordController extends Controller
      */
     public function index()
     {
+        return [Auth::user()->id];
         return PasswordResource::collection(Password::all());
 
     }
@@ -38,7 +40,7 @@ class PasswordController extends Controller
             'login' =>  $request->login,
             "password_length"   => Crypt::encryptString(strlen($request->password))
         ]);
-        return $a ? response('success', 201) : response('error',500);
+        return $a ? response()->json('success',201) : response('error',500);
 
 
     }
@@ -63,7 +65,16 @@ class PasswordController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $password = Password::where('id', $id)->update([
+            'name'  =>  $request->name,
+            'password'  =>  Crypt::encryptString($request->password),
+            'email' => $request->email,
+            'login' =>  $request->login,
+            "password_length"   => Crypt::encryptString(strlen($request->password)),
+            ''
+        ]);
+        $password->update($request);
+        return [$password, $id];
     }
 
     /**

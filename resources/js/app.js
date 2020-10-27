@@ -5,7 +5,6 @@
  */
 
 require('./bootstrap');
-
 import Vue from 'vue';
 import routes from './router/router.js';
 import App from './views/App.vue';

@@ -4,19 +4,19 @@
             <div class="col-md-12">
                 <div class="card">
 
-                    <form method="POST" action="">
+                    <form method="POST" action="" @submit.prevent="updatePassword">
 
                         <div class="form-group row">
                             <label for="password_email" class="col-md-4 col-form-label text-md-right">Email</label>
                             <div class="col-md-6">
-                                <input id="password_email" type="text" class="form-control" name="password_email" required autocomplete="Password_email" v-model="password.email">
+                                <input id="password_email" type="email" class="form-control" name="password_email"  autocomplete="Password_email" v-model="password.email">
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="password_login" class="col-md-4 col-form-label text-md-right">Login</label>
                             <div class="col-md-6">
-                                <input id="password_login" type="text" class="form-control" name="password_login" required autocomplete="new-password" v-model="password.login">
+                                <input id="password_login" type="text" class="form-control" name="password_login"  autocomplete="new-password" v-model="password.login">
                             </div>
                         </div>
                         <!--  Password change to component   -->
@@ -29,13 +29,13 @@
                         <div class="form-group row">
                             <label for="website" class="col-md-4 col-form-label text-md-right">Website</label>
                             <div class="col-md-6">
-                                <input id="website" type="text" class="form-control" name="website" required autocomplete="password" v-model="password.website">
+                                <input id="website" type="text" class="form-control" name="website"  v-model="password.website">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" required autocomplete="password" v-model="password.name">
+                                <input id="name" type="text" class="form-control" name="name"  autocomplete="password" v-model="password.name">
                             </div>
                         </div>
                         <categories :currentCategory="password.category_id"></categories>
@@ -43,9 +43,10 @@
                         <div class="form-group row">
                             <label for="notes" class="col-md-4 col-form-label text-md-right">Notes</label>
                             <div class="col-md-6">
-                                <input id="notes" type="text" class="form-control" name="notes" required autocomplete="password" v-model="password.notes">
+                                <input id="notes" type="text" class="form-control" name="notes"  autocomplete="password" v-model="password.notes">
                             </div>
                         </div>
+                        <button type="submit">Update/save</button>
 
                     </form>
                    
@@ -56,14 +57,20 @@
 </template>
 
 <script>
-    import {GET_PASSWORD} from '../endpoints/endpoints.js';
+    import {GET_PASSWORD, UPDATE_PASSWORD} from '../endpoints/endpoints.js';
+    
 
     export default {
          methods: {
             getPassword(){
-                axios.get(GET_PASSWORD(this.passwordID)).then(({data: {data}}) => {
+                axios.get(GET_PASSWORD(this.passwordID), {user:1}).then(({data: {data}}) => {
                     this.password = data;
                     this.password.password_length = this.generatePassword(this.password.password_length);
+                });
+            },
+            updatePassword() {
+                axios.put(UPDATE_PASSWORD(this.passwordID), this.password).then(res =>{
+                    console.log(res);
                 });
             },
             generatePassword(length){

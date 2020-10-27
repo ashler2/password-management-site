@@ -17,12 +17,17 @@ use App\Http\Controllers\API\CategoryController;
 |
 */
 
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('passwords', PasswordController::class );
+Route::middleware('auth:api')->group(function () {
 
-// Categories
-Route::get('/categories', [CategoryController::class, 'index']);
-Route::get('/categories/{category}', [CategoryController::class, 'show']);
+    
+    Route::apiResource('passwords', PasswordController::class );
+    
+    // Categories
+    Route::get('/categories', [CategoryController::class, 'index']);
+    Route::get('/categories/{category}', [CategoryController::class, 'show']);
+});

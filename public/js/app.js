@@ -2127,16 +2127,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   methods: {
     getPassword: function getPassword() {
       var _this = this;
 
-      axios.get(Object(_endpoints_endpoints_js__WEBPACK_IMPORTED_MODULE_0__["GET_PASSWORD"])(this.passwordID)).then(function (_ref) {
+      axios.get(Object(_endpoints_endpoints_js__WEBPACK_IMPORTED_MODULE_0__["GET_PASSWORD"])(this.passwordID), {
+        user: 1
+      }).then(function (_ref) {
         var data = _ref.data.data;
         _this.password = data;
         _this.password.password_length = _this.generatePassword(_this.password.password_length);
+      });
+    },
+    updatePassword: function updatePassword() {
+      axios.put(Object(_endpoints_endpoints_js__WEBPACK_IMPORTED_MODULE_0__["UPDATE_PASSWORD"])(this.passwordID), this.password).then(function (res) {
+        console.log(res);
       });
     },
     generatePassword: function generatePassword(length) {
@@ -2268,8 +2276,12 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     createPassword: function createPassword() {
+      var _this = this;
+
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(_endpoints_endpoints_js__WEBPACK_IMPORTED_MODULE_1__["POST_PASSWORD"], this.form).then(function (res) {
-        console.log(res);
+        res.status === 201 ? _this.$parent.toggleCreatePassword() : alert('error');
+
+        _this.$parent.getPasswords();
       });
     }
   }
@@ -2292,7 +2304,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    userId: Object
+  }
+});
 
 /***/ }),
 
@@ -38314,7 +38330,15 @@ var render = function() {
         _c("div", { staticClass: "card" }, [
           _c(
             "form",
-            { attrs: { method: "POST", action: "" } },
+            {
+              attrs: { method: "POST", action: "" },
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.updatePassword($event)
+                }
+              }
+            },
             [
               _c("div", { staticClass: "form-group row" }, [
                 _c(
@@ -38339,9 +38363,8 @@ var render = function() {
                     staticClass: "form-control",
                     attrs: {
                       id: "password_email",
-                      type: "text",
+                      type: "email",
                       name: "password_email",
-                      required: "",
                       autocomplete: "Password_email"
                     },
                     domProps: { value: _vm.password.email },
@@ -38382,7 +38405,6 @@ var render = function() {
                       id: "password_login",
                       type: "text",
                       name: "password_login",
-                      required: "",
                       autocomplete: "new-password"
                     },
                     domProps: { value: _vm.password.login },
@@ -38464,13 +38486,7 @@ var render = function() {
                       }
                     ],
                     staticClass: "form-control",
-                    attrs: {
-                      id: "website",
-                      type: "text",
-                      name: "website",
-                      required: "",
-                      autocomplete: "password"
-                    },
+                    attrs: { id: "website", type: "text", name: "website" },
                     domProps: { value: _vm.password.website },
                     on: {
                       input: function($event) {
@@ -38509,7 +38525,6 @@ var render = function() {
                       id: "name",
                       type: "text",
                       name: "name",
-                      required: "",
                       autocomplete: "password"
                     },
                     domProps: { value: _vm.password.name },
@@ -38554,7 +38569,6 @@ var render = function() {
                       id: "notes",
                       type: "text",
                       name: "notes",
-                      required: "",
                       autocomplete: "password"
                     },
                     domProps: { value: _vm.password.notes },
@@ -38568,6 +38582,10 @@ var render = function() {
                     }
                   })
                 ])
+              ]),
+              _vm._v(" "),
+              _c("button", { attrs: { type: "submit" } }, [
+                _vm._v("Update/save")
               ])
             ],
             1
@@ -54651,7 +54669,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!*********************************************!*\
   !*** ./resources/js/endpoints/endpoints.js ***!
   \*********************************************/
-/*! exports provided: APP_URL, API_URL, GET_PASSWORDS, GET_PASSWORD, POST_PASSWORD, GET_CATEGORIES */
+/*! exports provided: APP_URL, API_URL, GET_PASSWORDS, GET_PASSWORD, POST_PASSWORD, UPDATE_PASSWORD, GET_CATEGORIES */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -54661,6 +54679,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_PASSWORDS", function() { return GET_PASSWORDS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_PASSWORD", function() { return GET_PASSWORD; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "POST_PASSWORD", function() { return POST_PASSWORD; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_PASSWORD", function() { return UPDATE_PASSWORD; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_CATEGORIES", function() { return GET_CATEGORIES; });
 var APP_URL = 'http://password-manager';
 var API_URL = 'http://password-manager/api'; // Password 
@@ -54669,7 +54688,10 @@ var GET_PASSWORDS = "".concat(API_URL, "/passwords");
 var GET_PASSWORD = function GET_PASSWORD(password) {
   return "".concat(API_URL, "/passwords/").concat(password);
 };
-var POST_PASSWORD = "".concat(API_URL, "/passwords"); // Categories
+var POST_PASSWORD = "".concat(API_URL, "/passwords");
+var UPDATE_PASSWORD = function UPDATE_PASSWORD(password) {
+  return "".concat(API_URL, "/passwords/").concat(password);
+}; // Categories
 
 var GET_CATEGORIES = "".concat(API_URL, "/categories");
 

@@ -8,6 +8,7 @@
     export default {
         props:{
             userId: Object
-        }
+        },
+
     };
 </script>

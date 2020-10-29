@@ -22,12 +22,13 @@
 
 <script>
 import axios from 'axios';
-import {GET_PASSWORDS} from '../endpoints/endpoints';
+import {GET_PASSWORDS, GET_SANCTUM} from '../endpoints/endpoints';
 export default {
     data () {
         return {
             passwords: [],
-            createPassword: false
+            createPassword: false,
+            user: null
         };
     }, 
     mounted () {
@@ -35,8 +36,10 @@ export default {
     },
     methods: {
         getPasswords () {
-            axios.get(GET_PASSWORDS).then(({data: {data}}) => {
-                this.passwords = data;
+            axios.get(GET_SANCTUM).then(res => {
+                axios.get(GET_PASSWORDS).then(({data: {data}}) => {
+                    this.passwords = data;
+                });
             });
         },
         toggleCreatePassword () {

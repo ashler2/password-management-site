@@ -30,6 +30,6 @@ class Password extends Model
     }
 
     public function Users() {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class, "password_user");
     }
 }

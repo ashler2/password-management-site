@@ -54451,6 +54451,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _router_router_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./router/router.js */ "./resources/js/router/router.js");
 /* harmony import */ var _views_App_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./views/App.vue */ "./resources/js/views/App.vue");
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./utils */ "./resources/js/utils/index.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -54462,23 +54463,23 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 
+
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_3__["default"]({
   mode: 'history',
   routes: _router_router_js__WEBPACK_IMPORTED_MODULE_1__["default"]
-});
-router.beforeEach(function (to, from, next) {
-  if (!to.meta.allowAnonymous && !isLoggedIn()) {
-    next({
-      path: '/login',
-      query: {
-        redirect: to.fullPath
-      }
-    });
-  } else {
-    next();
-  }
-});
+}); // router.beforeEach((to, from, next) => {
+//     if(!to.meta.allowAnonymous && !isLoggedIn()){
+//         next({
+//             path: '/login',
+//             query: { redirect: to.fullPath}
+//         })
+//     }
+//     else {
+//         next()
+//     }
+// })
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -54977,6 +54978,27 @@ var routes = [{
   component: _components_Password_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
 }];
 /* harmony default export */ __webpack_exports__["default"] = (routes);
+
+/***/ }),
+
+/***/ "./resources/js/utils/index.js":
+/*!*************************************!*\
+  !*** ./resources/js/utils/index.js ***!
+  \*************************************/
+/*! exports provided: logIn, isLoggedIn */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logIn", function() { return logIn; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isLoggedIn", function() { return isLoggedIn; });
+var logIn = function logIn() {
+  localStorage.setItem('isLoggedIn', true);
+};
+var isLoggedIn = function isLoggedIn() {
+  var loggedIn = localStorage.getItem('isLoggedIn');
+  return loggedIn ? true : false;
+};
 
 /***/ }),
 

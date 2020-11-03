@@ -20,8 +20,8 @@ class PasswordController extends Controller
      */
     public function index()
     {
-
-        return PasswordResource::collection(Password::all());
+        $user = Auth::user();
+        return PasswordResource::collection($user->passwords);
 
     }
 

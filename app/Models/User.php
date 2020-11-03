@@ -43,6 +43,6 @@ class User extends Authenticatable
     ];
 
     public function passwords () {
-        return $this->belongsToMany(Password::class);
+        return $this->belongsToMany(Password::class, "password_user");
     }
 }

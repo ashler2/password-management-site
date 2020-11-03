@@ -2362,8 +2362,11 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.withCredentials = true;
   },
   methods: {
     getPasswords: function getPasswords() {
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(_endpoints_endpoints__WEBPACK_IMPORTED_MODULE_1__["GET_PASSWORDS"]).then(function (res) {
-        console.log(res); // this.passwords = data;
+      var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(_endpoints_endpoints__WEBPACK_IMPORTED_MODULE_1__["GET_PASSWORDS"]).then(function (_ref) {
+        var data = _ref.data.data;
+        _this.passwords = data;
       });
     },
     toggleCreatePassword: function toggleCreatePassword() {
@@ -2442,7 +2445,10 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.withCredentials = true;
         axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(_endpoints_endpoints__WEBPACK_IMPORTED_MODULE_1__["POST_LOGIN"], _this.formData).then(function (res) {
           console.log(res);
 
-          if (res.status === 204) {// this.$router.push({path: 'home'});
+          if (res.status === 204) {
+            _this.$router.push({
+              path: 'home'
+            });
           }
 
           ;
@@ -54902,8 +54908,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_CATEGORIES", function() { return GET_CATEGORIES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_SANCTUM", function() { return GET_SANCTUM; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "POST_LOGIN", function() { return POST_LOGIN; });
-var APP_URL = 'http://127.0.0.1:8000';
-var API_URL = 'http://127.0.0.1:8000/api'; // export const APP_URL = 'http://password-manager';
+var APP_URL = 'http://localhost:8000';
+var API_URL = 'http://localhost:8000/api'; // export const APP_URL = 'http://password-manager';
 // export const API_URL = 'http://password-manager/api';
 // Password 
 

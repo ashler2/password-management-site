@@ -57,7 +57,7 @@ export default {
                 axios.post(POST_LOGIN, this.formData).then(res => {
                     console.log(res);
                     if(res.status === 204) {
-                        // this.$router.push({path: 'home'});
+                        this.$router.push({path: 'home'});
                     };
                 }).catch(error => {
                     console.log('error' + error);

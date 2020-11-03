@@ -39,9 +39,9 @@ export default {
     methods: {
         getPasswords () {
 
-            axios.get(GET_PASSWORDS).then((res) => {
-                console.log(res);
-                // this.passwords = data;
+            axios.get(GET_PASSWORDS).then(({data: {data}}) => {
+
+                this.passwords = data;
             });
 
         },

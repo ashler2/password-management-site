@@ -21,7 +21,7 @@ export const GET_CATEGORIES = `${API_URL}/categories`;
 
 // Auth
 
-export const GET_SANCTUM = `${API_URL}/sanctum/csrf-cookie`;
+export const GET_SANCTUM = `${APP_URL}/sanctum/csrf-cookie`;
 
 // login 
 export const POST_LOGIN = `${APP_URL}/login`;

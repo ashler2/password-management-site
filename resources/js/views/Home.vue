@@ -22,6 +22,8 @@
 
 <script>
 import axios from 'axios';
+axios.defaults.withCredentials = true;
+
 import {GET_PASSWORDS, GET_SANCTUM} from '../endpoints/endpoints';
 export default {
     data () {
@@ -36,11 +38,12 @@ export default {
     },
     methods: {
         getPasswords () {
-            axios.get(GET_SANCTUM).then(res => {
-                axios.get(GET_PASSWORDS).then(({data: {data}}) => {
-                    this.passwords = data;
-                });
+
+            axios.get(GET_PASSWORDS).then((res) => {
+                console.log(res);
+                // this.passwords = data;
             });
+
         },
         toggleCreatePassword () {
             this.createPassword = !this.createPassword;

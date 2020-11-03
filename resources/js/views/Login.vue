@@ -34,7 +34,8 @@
 
 <script>
 import axios from 'axios';
-import {logIn} from '../utils';
+axios.defaults.withCredentials = true;
+
 import {GET_SANCTUM, POST_LOGIN} from '../endpoints/endpoints';
 export default {
     data () {
@@ -56,8 +57,7 @@ export default {
                 axios.post(POST_LOGIN, this.formData).then(res => {
                     console.log(res);
                     if(res.status === 204) {
-                        logIn();
-                        this.$router.push({path: 'home'});
+                        // this.$router.push({path: 'home'});
                     };
                 }).catch(error => {
                     console.log('error' + error);

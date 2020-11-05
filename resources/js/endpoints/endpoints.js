@@ -9,10 +9,12 @@ export const API_URL = 'http://localhost:8000/api';
 export const GET_PASSWORDS = `${API_URL}/passwords`;
 
 export const GET_PASSWORD = (password) => `${API_URL}/passwords/${password}`;
+export const GET_DECRYPTED_PASSWORD = (password) => `${API_URL}/passwords/${password}/decrypt`;
 
 export const POST_PASSWORD = `${API_URL}/passwords`;
 
 export const UPDATE_PASSWORD = (password) =>  `${API_URL}/passwords/${password}`;
+
 
 // Categories
 export const GET_CATEGORIES = `${API_URL}/categories`;

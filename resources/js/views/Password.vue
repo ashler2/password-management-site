@@ -19,13 +19,7 @@
                                 <input id="password_login" type="text" class="form-control" name="password_login"  autocomplete="new-password" v-model="password.login">
                             </div>
                         </div>
-                        <!--  Password change to component   -->
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required autocomplete="password" v-model="password.password_length">
-                            </div>
-                        </div>
+
                         <div class="form-group row">
                             <label for="website" class="col-md-4 col-form-label text-md-right">Website</label>
                             <div class="col-md-6">
@@ -49,7 +43,16 @@
                         <button type="submit">Update/save</button>
 
                     </form>
-                   
+                    <h1>Password</h1>
+                   <form action="" @submit.prevent>
+                       <password-input :passwordLength="password.password_length" :passwordId="password.id"></password-input>
+                        <!-- <div class="form-group row">
+                            <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
+                            <div class="col-md-6">
+                                <input id="password" type="password" class="form-control" name="password" required autocomplete="password" v-model="password.password_length">
+                            </div>
+                        </div> -->
+                   </form>
                 </div>
             </div>
         </div>
@@ -58,12 +61,15 @@
 
 <script>
     import {GET_PASSWORD, UPDATE_PASSWORD} from '../endpoints/endpoints.js';
-    
+
 
     export default {
+        components: {
+
+        },
          methods: {
             getPassword(){
-                axios.get(GET_PASSWORD(this.passwordID), {user:1}).then(({data: {data}}) => {
+                axios.get(GET_PASSWORD(this.passwordID)).then(({data: {data}}) => {
                     this.password = data;
                     this.password.password_length = this.generatePassword(this.password.password_length);
                 });
@@ -91,6 +97,7 @@
         props: {
 
         },
+      
        
     };
 </script>

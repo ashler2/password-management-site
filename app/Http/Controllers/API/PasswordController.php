@@ -33,14 +33,14 @@ class PasswordController extends Controller
      */
     public function store(Request $request)
     {
-        $a = Password::create([
+        $password = Password::create([
             'name'  =>  $request->name,
             'password'  =>  Crypt::encryptString($request->password),
             'email' => $request->email,
             'login' =>  $request->login,
             "password_length"   => Crypt::encryptString(strlen($request->password))
         ]);
-        return $a ? response()->json('success',201) : response('error',500);
+        return $password ? response()->json('success',201) : response('error',500);
 
 
     }
@@ -87,4 +87,10 @@ class PasswordController extends Controller
     {
         //
     }
+
+    public function decrypt(Password $password){
+        
+        return Crypt::decryptString($password->password);
+
+    } 
 }

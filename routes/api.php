@@ -26,6 +26,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     
     Route::apiResource('passwords', PasswordController::class );
+    Route::get('passwords/{password}/decrypt', [PasswordController::class, 'decrypt'])->middleware('track');
     
     // Categories
     Route::get('/categories', [CategoryController::class, 'index']);

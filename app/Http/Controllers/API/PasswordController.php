@@ -83,9 +83,10 @@ class PasswordController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Password $password)
     {
-        //
+        $deleted = $password->delete();
+        return $deleted ? response()->json('success', 204) : response()->json('failed', 400);
     }
 
     public function decrypt(Password $password){

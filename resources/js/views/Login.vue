@@ -53,9 +53,7 @@ export default {
     methods: {
         handleLogin(){
             axios.get(GET_SANCTUM).then(res => {
-                console.log(res)
                 axios.post(POST_LOGIN, this.formData).then(res => {
-                    console.log(res);
                     if(res.status === 204) {
                         this.$router.push({path: 'home'});
                     };

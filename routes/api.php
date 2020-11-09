@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\API\PasswordController;
 use App\Http\Controllers\API\CategoryController;
+use App\Http\Controllers\API\ActivityController;
+use App\Http\Controllers\API\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,10 +25,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::middleware('auth:sanctum')->group(function () {
-
-    
+    //users
+    Route::get('/users', [UserController::class, 'index']);
+    // passwords
     Route::apiResource('passwords', PasswordController::class );
     Route::get('passwords/{password}/decrypt', [PasswordController::class, 'decrypt'])->middleware('track');
+    // activity
+    Route::apiResource('activity', ActivityController::class);
     
     // Categories
     Route::get('/categories', [CategoryController::class, 'index']);

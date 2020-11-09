@@ -19,6 +19,13 @@ export const UPDATE_PASSWORD = (password) =>  `${API_URL}/passwords/${password}`
 // Categories
 export const GET_CATEGORIES = `${API_URL}/categories`;
 
+// users 
+export const GET_USERS  = `${API_URL}/users`;
+
+// Activity 
+
+export const GET_ACTIVITIES = `${API_URL}/activity`;
+export const GET_ACTIVITY = (activity) => `${API_URL}/activity/${activity}`;
 
 
 // Auth

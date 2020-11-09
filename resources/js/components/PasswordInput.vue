@@ -19,18 +19,18 @@ export default {
         return {
             type: "password",
             password: ''
-        }
+        };
     },
     methods: {
         showPassword (){
-            this.getPassword()
+            this.getPassword();
             console.log(this.type === 'password');
            this.type = this.type === 'password' ? 'text' : 'password';
         },
         getPassword() {
             axios.get(GET_DECRYPTED_PASSWORD(this.passwordId)).then(({data})=> {
                 this.password = data;
-            })
+            });
         }
     },
     mounted() {

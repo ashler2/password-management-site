@@ -9,7 +9,7 @@ import Vue from 'vue';
 import routes from './router/router.js';
 import App from './views/App.vue';
 import VueRouter from 'vue-router';
-import {isLoggedIn} from './utils'
+import {isLoggedIn} from './utils';
 
 window.Vue = require('vue');
 

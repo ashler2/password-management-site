@@ -26,7 +26,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::middleware('auth:sanctum')->group(function () {
     //users
-    Route::get('/users', [UserController::class, 'index']);
+    Route::apiResource('/users', UserController::class);
+
     // passwords
     Route::apiResource('passwords', PasswordController::class );
     Route::get('passwords/{password}/decrypt', [PasswordController::class, 'decrypt'])->middleware('track');

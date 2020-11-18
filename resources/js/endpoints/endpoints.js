@@ -21,6 +21,7 @@ export const GET_CATEGORIES = `${API_URL}/categories`;
 
 // users 
 export const GET_USERS  = `${API_URL}/users`;
+export const DELETE_USER = (user) => `${API_URL}/users/${user}`
 
 // Activity 
 
@@ -34,3 +35,5 @@ export const GET_SANCTUM = `${APP_URL}/sanctum/csrf-cookie`;
 
 // login 
 export const POST_LOGIN = `${APP_URL}/login`;
+
+

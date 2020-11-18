@@ -17,4 +17,18 @@ class UserController extends Controller
     public function show(Request $request){
         // return new UserResource();
     }
+
+   /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(User $user){
+        return $user->delete();
+    }
+
+    public function ban (User $user){
+        
+    }
 }

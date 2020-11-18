@@ -14,6 +14,10 @@
         :to="{name: 'Activity'}">
         Actvity
         </router-link>
+        <router-link 
+        :to="{name: 'Admin'}">
+        Admin
+        </router-link>
     </nav>
 </header>
 

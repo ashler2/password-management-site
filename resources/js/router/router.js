@@ -5,7 +5,7 @@ import Home from '../views/Home.vue';
 import Password from '../views/Password.vue';
 import Login from '../views/Login.vue';
 import Activity from '../views/Activity.vue';
-import Admin from '../views/Admin.vue'
+import Admin from '../views/Admin.vue';
 
 
 

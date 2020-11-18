@@ -20,7 +20,7 @@
 
 <script>
 import axios from 'axios';
-import {GET_USERS} from '../endpoints/endpoints.js'
+import {GET_USERS} from '../endpoints/endpoints.js';
 export default {
 
     methods: {
@@ -36,7 +36,7 @@ export default {
     data() {
         return {
             users: []
-        }
+        };
     },
     
 };

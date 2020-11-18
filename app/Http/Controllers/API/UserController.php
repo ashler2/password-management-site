@@ -29,6 +29,22 @@ class UserController extends Controller
     }
 
     public function ban (User $user){
-        
+        $user->banned = true;
+        $user->save();
+        return response()->json([
+            'user'  =>  $user->id,
+            'banned'    => $user->banned,
+            'success'    =>  true
+        ], 201 );
     }
+
+    public function unban(User $user){
+        $user->banned = false;
+        $user->save();
+        return response()->json([
+            'user'  =>  $user->id,
+            'banned'    => $user->banned,
+            'success'    =>  true
+        ], 201 );
+    } 
 }

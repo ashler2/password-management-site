@@ -2278,11 +2278,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     users: Array
+  },
+  data: function data() {
+    return {};
+  },
+  computed: {
+    usersArr: {
+      get: function get() {
+        return this.users;
+      },
+      set: function set(v) {
+        this.$emit('input', v);
+      }
+    }
   },
   methods: {
     deleteUser: function deleteUser(userId) {
@@ -2291,7 +2309,32 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     banUser: function banUser(userId) {
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post();
+      var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(Object(_endpoints_endpoints_js__WEBPACK_IMPORTED_MODULE_1__["BAN_USER"])(userId)).then(function (res) {
+        _this.usersArr.map(function (user) {
+          if (user.id === userId) {
+            user.banned = true;
+          }
+
+          ;
+          return user;
+        });
+      });
+    },
+    unbanUser: function unbanUser(userId) {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(Object(_endpoints_endpoints_js__WEBPACK_IMPORTED_MODULE_1__["UNBAN_USER"])(userId)).then(function (res) {
+        _this2.usersArr.map(function (user) {
+          if (user.id === userId) {
+            user.banned = false;
+          }
+
+          ;
+          return user;
+        });
+      });
     }
   }
 });
@@ -39016,7 +39059,7 @@ var render = function() {
       [
         _vm._m(0),
         _vm._v(" "),
-        _vm._l(_vm.users, function(user, index) {
+        _vm._l(_vm.usersArr, function(user, index) {
           return _c("tr", { key: index }, [
             _c("td", [_vm._v(_vm._s(user.id))]),
             _vm._v(" "),
@@ -39032,14 +39075,44 @@ var render = function() {
               0
             ),
             _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(user.banned ? "banned" : "active"))]),
+            _vm._v(" "),
             _c("td", [
               _c("a", { staticClass: "btn btn-default", attrs: { href: "" } }, [
                 _vm._v("Edit")
               ]),
               _vm._v(" "),
-              _c("a", { staticClass: "btn ", attrs: { href: "" } }, [
-                _vm._v("Ban")
-              ]),
+              !user.banned
+                ? _c(
+                    "button",
+                    {
+                      staticClass: "btn",
+                      attrs: { href: "" },
+                      on: {
+                        click: function($event) {
+                          return _vm.banUser(user.id)
+                        }
+                      }
+                    },
+                    [_vm._v("Ban")]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              user.banned
+                ? _c(
+                    "button",
+                    {
+                      staticClass: "btn",
+                      attrs: { href: "" },
+                      on: {
+                        click: function($event) {
+                          return _vm.unbanUser(user.id)
+                        }
+                      }
+                    },
+                    [_vm._v("unban")]
+                  )
+                : _vm._e(),
               _vm._v(" "),
               _c(
                 "button",
@@ -39073,6 +39146,8 @@ var staticRenderFns = [
       _c("th", [_vm._v("Name")]),
       _vm._v(" "),
       _c("th", [_vm._v("Roles")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Status")]),
       _vm._v(" "),
       _c("th", [_vm._v("Actions")])
     ])
@@ -55672,7 +55747,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!*********************************************!*\
   !*** ./resources/js/endpoints/endpoints.js ***!
   \*********************************************/
-/*! exports provided: APP_URL, API_URL, GET_PASSWORDS, GET_PASSWORD, GET_DECRYPTED_PASSWORD, POST_PASSWORD, UPDATE_PASSWORD, GET_CATEGORIES, GET_USERS, DELETE_USER, GET_ACTIVITIES, GET_ACTIVITY, GET_SANCTUM, POST_LOGIN */
+/*! exports provided: APP_URL, API_URL, GET_PASSWORDS, GET_PASSWORD, GET_DECRYPTED_PASSWORD, POST_PASSWORD, UPDATE_PASSWORD, GET_CATEGORIES, GET_USERS, DELETE_USER, BAN_USER, UNBAN_USER, GET_ACTIVITIES, GET_ACTIVITY, GET_SANCTUM, POST_LOGIN */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -55687,6 +55762,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_CATEGORIES", function() { return GET_CATEGORIES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_USERS", function() { return GET_USERS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DELETE_USER", function() { return DELETE_USER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BAN_USER", function() { return BAN_USER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UNBAN_USER", function() { return UNBAN_USER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_ACTIVITIES", function() { return GET_ACTIVITIES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_ACTIVITY", function() { return GET_ACTIVITY; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_SANCTUM", function() { return GET_SANCTUM; });
@@ -55713,6 +55790,12 @@ var GET_CATEGORIES = "".concat(API_URL, "/categories"); // users
 var GET_USERS = "".concat(API_URL, "/users");
 var DELETE_USER = function DELETE_USER(user) {
   return "".concat(API_URL, "/users/").concat(user);
+};
+var BAN_USER = function BAN_USER(user) {
+  return "".concat(API_URL, "/users/").concat(user, "/ban");
+};
+var UNBAN_USER = function UNBAN_USER(user) {
+  return "".concat(API_URL, "/users/").concat(user, "/unban");
 }; // Activity 
 
 var GET_ACTIVITIES = "".concat(API_URL, "/activity");

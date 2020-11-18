@@ -27,6 +27,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware('auth:sanctum')->group(function () {
     //users
     Route::apiResource('/users', UserController::class);
+    Route::post('/users/{user}/ban', [UserController::class, 'ban']);
+    Route::post('/users/{user}/unban', [UserController::class, 'unban']);
 
     // passwords
     Route::apiResource('passwords', PasswordController::class );

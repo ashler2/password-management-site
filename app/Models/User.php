@@ -101,6 +101,9 @@ class User extends Authenticatable
         return $this;
     }
 
+    public function isBanned(){
+        return $this->banned ? true : false;
+    }
 
 
 

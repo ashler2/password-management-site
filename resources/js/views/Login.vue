@@ -23,6 +23,12 @@
                                 <input id="password" type="password" class="form-control" name="password" v-model="formData.password" required autocomplete="current-password">
                             </div>
                         </div>
+                        <div class="form-group row" v-if="message.length">
+                            <div class="alert alert-danger">
+                                {{message}}
+
+                            </div>
+                        </div>
 
                         <button type="submit">Submit</button>
                     </form>
@@ -44,7 +50,8 @@ export default {
                 email:'',
                 password:''
 
-            }
+            },
+            message: ''
         };
     }, 
     mounted () {
@@ -57,8 +64,10 @@ export default {
                     if(res.status === 204) {
                         this.$router.push({path: 'home'});
                     };
+
                 }).catch(error => {
-                    console.log('error' + error);
+                    this.message = error.response.data.message;
+
                 });
             });
         }

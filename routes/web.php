@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PasswordController;
+use App\Http\Controllers\Auth\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,8 +18,8 @@ use App\Http\Controllers\PasswordController;
 Route::get('/', function () {
     return view('home');
 });
-
 Auth::routes();
+Route::post('/login', [LoginController::class, 'loginIfNotBanned']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

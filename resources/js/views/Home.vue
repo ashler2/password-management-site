@@ -35,6 +35,8 @@ export default {
     }, 
     mounted () {
         this.getPasswords();
+
+
     },
     methods: {
         getPasswords () {

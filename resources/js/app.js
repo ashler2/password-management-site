@@ -9,7 +9,7 @@ import Vue from 'vue';
 import routes from './router/router.js';
 import App from './views/App.vue';
 import VueRouter from 'vue-router';
-import {isLoggedIn} from './utils';
+import store from './vuex';
 
 window.Vue = require('vue');
 
@@ -18,18 +18,20 @@ const router = new VueRouter({
     routes: routes
 });
 
-// router.beforeEach((to, from, next) => {
-//     if(!to.meta.allowAnonymous && !isLoggedIn()){
-//         next({
-//             path: '/login',
-//             query: { redirect: to.fullPath}
-//         })
-//     }
-//     else {
-//         next()
-//     }
-// })
+router.beforeEach((to,from, next) => {
 
+    if(to.path !== '/'){
+
+        store.state.loggedIn ? next() : next({
+            path: '/',
+            query: { redirect: to.fullPath } 
+        });
+    }
+    else {
+        next();
+    }
+
+});
 
 /**
  * The following block of code may be used to automatically register your
@@ -43,16 +45,11 @@ const files = require.context('./', true, /\.vue$/i);
 files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
 
 const app = new Vue({
     el: '#app',
-    // component: {App},
     router,
-    render: h => h(App)
+    render: h => h(App),
+    store: store
 
 });

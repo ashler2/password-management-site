@@ -21,6 +21,7 @@ export const GET_CATEGORIES = `${API_URL}/categories`;
 
 // users 
 export const GET_USERS  = `${API_URL}/users`;
+export const GET_USER = (user) =>  `${API_URL}/users/${user}`;
 export const DELETE_USER = (user) => `${API_URL}/users/${user}`;
 export const BAN_USER   =   (user)  =>  `${API_URL}/users/${user}/ban`;
 export const UNBAN_USER   =   (user)  =>  `${API_URL}/users/${user}/unban`;

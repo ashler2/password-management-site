@@ -15,7 +15,8 @@
                 <td><span v-for="(roles,index) in user.roles" :key="index">{{roles.screen_name}}</span></td>
                 <td>{{ user.banned ? 'banned' : 'active' }}</td>
                 <td>
-                    <a href="" class="btn btn-default">Edit</a>
+
+                    <router-link  :to="{name: 'Admin-Single', params: { user:user.id}}" class="btn btn-default">Edit</router-link>
 
                     <button href="" class="btn" @click="banUser(user.id)" v-if="!user.banned">Ban</button>
                     <button href="" class="btn" @click="unbanUser(user.id)" v-if="user.banned">unban</button>

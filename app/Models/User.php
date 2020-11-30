@@ -6,7 +6,6 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Arr;
 use App\Models\Password;
 use App\Models\Permission;
 use App\Models\Role;
@@ -67,39 +66,9 @@ class User extends Authenticatable
         return $this->belongsToMany(Permission::class, 'user_permissions');
     }
 
-    public function hasPermission($permission){
-        // return (bool) $this->permissions->where('name', $permission)->count();
-        return $this->hasPermissionThroughRole($permission);
-    }
 
-    public function hasPermissionThroughRole($permission){
-        foreach($permission->roles as $role)
-        {
-            if($this->roles->contains($role)){
-                return true;
-            }
-        }
-        return false;
-    }
 
-    public function getPermission(array $permission){
-        return Permission::whereIn('name', $permission)->get();
-    }
-
-    public function givePermission(...$permission){
-        $permissions = $this->getPermission(Arr::flatten($permission));
-        if($permissions === null){
-            return $this;
-        };
-        $this->permissions()->saveMany($permission);
-        return $this;
-    }
-
-    public function removePermission(...$permission){
-        $permissions = $this->getPermission(Arr::flatten($permission));
-        $this->permissions()->detach($permissions);
-        return $this;
-    }
+   
 
     public function isBanned(){
         return $this->banned ? true : false;

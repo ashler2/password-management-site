@@ -20,17 +20,16 @@ use App\Http\Controllers\API\UserController;
 */
 
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
 Route::middleware('auth:sanctum')->group(function () {
     //users
     Route::apiResource('/users', UserController::class);
     Route::post('/users/{user}/ban', [UserController::class, 'ban']);
     Route::post('/users/{user}/unban', [UserController::class, 'unban']);
+    Route::get('/user', [UserController::class, 'loggedInUser']);
 
     // passwords
+    Route::get('passwords/test', [PasswordController::class, 'test']);
     Route::apiResource('passwords', PasswordController::class );
     Route::get('passwords/{password}/decrypt', [PasswordController::class, 'decrypt'])->middleware('track');
     // activity

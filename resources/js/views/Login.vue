@@ -42,7 +42,7 @@
 import axios from 'axios';
 axios.defaults.withCredentials = true;
 import {mapMutations} from 'vuex';
-import {GET_SANCTUM, POST_LOGIN} from '../endpoints/endpoints';
+import {GET_SANCTUM, POST_LOGIN, GET_LOGGED_IN_USER} from '../endpoints/endpoints';
 export default {
     data () {
         return {
@@ -57,12 +57,14 @@ export default {
     mounted () {
     },
     methods: {
-        ...mapMutations(['loggedIn']),
+        ...mapMutations(['loggedIn', 'setUser']),
         handleLogin(){
             axios.get(GET_SANCTUM).then(res => {
                 axios.post(POST_LOGIN, this.formData).then(res => {
-
-                    if(res.status === 204) {
+                    if(res.status === 204 || res.status === 200) {
+                        axios.get(GET_LOGGED_IN_USER).then(res => {
+                            this.setUser(res.data.data);
+                        })
                         this.loggedIn();
                         this.$router.push({path: 'home'});
                     };

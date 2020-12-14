@@ -14,6 +14,7 @@
         :to="{name: 'Activity'}">
         Actvity
         </router-link>
+
         <router-link 
         :to="{name: 'Admin'}">
         Admin
@@ -24,8 +25,26 @@
 </template>
 
 <script>
+import { mapGetters,mapState } from 'vuex';
 
 export default {
  
+    methods: {
+        ...mapGetters(['getRoles']),
+
+
+        isAdmin(){
+            console.log(this.$store.state.user.roles);
+        }
+    },
+    mounted() {
+        this.isAdmin();
+        console.log(this.getRoles());
+
+    },
+    computed: {
+        ...mapState(['user']),
+
+    }
 };
 </script>

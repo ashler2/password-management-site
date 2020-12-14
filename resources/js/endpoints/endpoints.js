@@ -7,6 +7,7 @@ export const API_URL = 'http://localhost:8000/api';
 // Password 
 
 export const GET_PASSWORDS = `${API_URL}/passwords`;
+export const GET_ALLPASSWORDS = `${API_URL}/passwords/test`;
 
 export const GET_PASSWORD = (password) => `${API_URL}/passwords/${password}`;
 export const GET_DECRYPTED_PASSWORD = (password) => `${API_URL}/passwords/${password}/decrypt`;
@@ -25,6 +26,7 @@ export const GET_USER = (user) =>  `${API_URL}/users/${user}`;
 export const DELETE_USER = (user) => `${API_URL}/users/${user}`;
 export const BAN_USER   =   (user)  =>  `${API_URL}/users/${user}/ban`;
 export const UNBAN_USER   =   (user)  =>  `${API_URL}/users/${user}/unban`;
+export const GET_LOGGED_IN_USER = `${API_URL}/user`
 
 // Activity 
 

@@ -2351,6 +2351,13 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2376,7 +2383,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['getRoles'])), {}, {
+    isAdmin: function isAdmin() {
+      console.log(this.$store.state.user.roles);
+    }
+  }),
+  mounted: function mounted() {
+    this.isAdmin();
+    console.log(this.getRoles());
+  },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['user']))
+});
 
 /***/ }),
 
@@ -2559,6 +2579,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2567,18 +2613,34 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      user: {}
+      user: {},
+      allPasswords: []
     };
   },
   methods: {
     getUser: function getUser() {
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(Object(_endpoints_endpoints__WEBPACK_IMPORTED_MODULE_1__["GET_USER"])(this.$route.params.user)).then(function (res) {
-        console.log(res);
+      var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(Object(_endpoints_endpoints__WEBPACK_IMPORTED_MODULE_1__["GET_USER"])(this.$route.params.user)).then(function (_ref) {
+        var data = _ref.data.data;
+        _this.user = data;
+      });
+    },
+    getPasswords: function getPasswords() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(_endpoints_endpoints__WEBPACK_IMPORTED_MODULE_1__["GET_ALLPASSWORDS"]).then(function (_ref2) {
+        var data = _ref2.data.data;
+        _this2.allPasswords = data;
       });
     }
   },
-  mounted: function mounted() {
+  computed: {
+    allPasswordsExcludingActive: function allPasswordsExcludingActive() {}
+  },
+  created: function created() {
     this.getUser();
+    this.getPasswords();
   }
 });
 
@@ -2747,13 +2809,17 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.withCredentials = true;
     };
   },
   mounted: function mounted() {},
-  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapMutations"])(['loggedIn'])), {}, {
+  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapMutations"])(['loggedIn', 'setUser'])), {}, {
     handleLogin: function handleLogin() {
       var _this = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(_endpoints_endpoints__WEBPACK_IMPORTED_MODULE_2__["GET_SANCTUM"]).then(function (res) {
         axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(_endpoints_endpoints__WEBPACK_IMPORTED_MODULE_2__["POST_LOGIN"], _this.formData).then(function (res) {
-          if (res.status === 204) {
+          if (res.status === 204 || res.status === 200) {
+            axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(_endpoints_endpoints__WEBPACK_IMPORTED_MODULE_2__["GET_LOGGED_IN_USER"]).then(function (res) {
+              _this.setUser(res.data.data);
+            });
+
             _this.loggedIn();
 
             _this.$router.push({
@@ -39507,10 +39573,101 @@ var render = function() {
           }
         })
       ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group row" }, [
+      _c(
+        "label",
+        {
+          staticClass: "col-md-4 col-form-label text-md-right",
+          attrs: { for: "user_name" }
+        },
+        [_vm._v("Email")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-6" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.user.email,
+              expression: "user.email"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: {
+            id: "user_name",
+            type: "email",
+            name: "user_name",
+            autocomplete: "user_name"
+          },
+          domProps: { value: _vm.user.email },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.user, "email", $event.target.value)
+            }
+          }
+        })
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group row" }, [
+      _c(
+        "label",
+        {
+          staticClass: "col-md-12 col-form-label text-md-right",
+          attrs: { for: "user_name" }
+        },
+        [_vm._v("Passwords")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-12" }, [
+        _c(
+          "table",
+          { staticStyle: { width: "100%" } },
+          [
+            _vm._m(0),
+            _vm._v(" "),
+            _vm._l(_vm.user.passwords, function(password, index) {
+              return _c("tr", { key: index }, [
+                _c("td", [_vm._v(_vm._s(password.id))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(password.name))])
+              ])
+            })
+          ],
+          2
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-12" }, [
+        _c(
+          "select",
+          _vm._l(_vm.allPasswords, function(password, index) {
+            return _c("option", { key: index }, [_vm._v(_vm._s(password.name))])
+          }),
+          0
+        )
+      ])
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("th", [_vm._v("Id")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Password Account Name")])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -56598,10 +56755,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_3__["default"]({
 router.beforeEach(function (to, from, next) {
   if (to.path !== '/') {
     _vuex__WEBPACK_IMPORTED_MODULE_4__["default"].state.loggedIn ? next() : next({
-      path: '/',
-      query: {
-        redirect: to.fullPath
-      }
+      path: '/'
     });
   } else {
     next();
@@ -57165,7 +57319,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!*********************************************!*\
   !*** ./resources/js/endpoints/endpoints.js ***!
   \*********************************************/
-/*! exports provided: APP_URL, API_URL, GET_PASSWORDS, GET_PASSWORD, GET_DECRYPTED_PASSWORD, POST_PASSWORD, UPDATE_PASSWORD, GET_CATEGORIES, GET_USERS, GET_USER, DELETE_USER, BAN_USER, UNBAN_USER, GET_ACTIVITIES, GET_ACTIVITY, GET_SANCTUM, POST_LOGIN */
+/*! exports provided: APP_URL, API_URL, GET_PASSWORDS, GET_ALLPASSWORDS, GET_PASSWORD, GET_DECRYPTED_PASSWORD, POST_PASSWORD, UPDATE_PASSWORD, GET_CATEGORIES, GET_USERS, GET_USER, DELETE_USER, BAN_USER, UNBAN_USER, GET_LOGGED_IN_USER, GET_ACTIVITIES, GET_ACTIVITY, GET_SANCTUM, POST_LOGIN */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -57173,6 +57327,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "APP_URL", function() { return APP_URL; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "API_URL", function() { return API_URL; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_PASSWORDS", function() { return GET_PASSWORDS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_ALLPASSWORDS", function() { return GET_ALLPASSWORDS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_PASSWORD", function() { return GET_PASSWORD; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_DECRYPTED_PASSWORD", function() { return GET_DECRYPTED_PASSWORD; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "POST_PASSWORD", function() { return POST_PASSWORD; });
@@ -57183,6 +57338,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DELETE_USER", function() { return DELETE_USER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BAN_USER", function() { return BAN_USER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UNBAN_USER", function() { return UNBAN_USER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_LOGGED_IN_USER", function() { return GET_LOGGED_IN_USER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_ACTIVITIES", function() { return GET_ACTIVITIES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_ACTIVITY", function() { return GET_ACTIVITY; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_SANCTUM", function() { return GET_SANCTUM; });
@@ -57193,6 +57349,7 @@ var API_URL = 'http://localhost:8000/api'; // export const APP_URL = 'http://pas
 // Password 
 
 var GET_PASSWORDS = "".concat(API_URL, "/passwords");
+var GET_ALLPASSWORDS = "".concat(API_URL, "/passwords/test");
 var GET_PASSWORD = function GET_PASSWORD(password) {
   return "".concat(API_URL, "/passwords/").concat(password);
 };
@@ -57218,7 +57375,8 @@ var BAN_USER = function BAN_USER(user) {
 };
 var UNBAN_USER = function UNBAN_USER(user) {
   return "".concat(API_URL, "/users/").concat(user, "/unban");
-}; // Activity 
+};
+var GET_LOGGED_IN_USER = "".concat(API_URL, "/user"); // Activity 
 
 var GET_ACTIVITIES = "".concat(API_URL, "/activity");
 var GET_ACTIVITY = function GET_ACTIVITY(activity) {
@@ -57787,16 +57945,23 @@ __webpack_require__.r(__webpack_exports__);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
 var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   state: {
-    loggedIn: false
+    loggedIn: false,
+    user: {}
   },
   mutations: {
     loggedIn: function loggedIn(state) {
       state.loggedIn = true;
+    },
+    setUser: function setUser(state, user) {
+      state.user = user;
     }
   },
   getters: {
     isLoggedIn: function isLoggedIn(state) {
       return state.loggedIn;
+    },
+    getRoles: function getRoles(state) {
+      return state.user.roles;
     }
   }
 });

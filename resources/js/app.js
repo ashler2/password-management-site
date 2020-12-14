@@ -19,12 +19,10 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to,from, next) => {
-
     if(to.path !== '/'){
-
         store.state.loggedIn ? next() : next({
             path: '/',
-            query: { redirect: to.fullPath } 
+
         });
     }
     else {

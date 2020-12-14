@@ -94,4 +94,11 @@ class PasswordController extends Controller
         return Crypt::decryptString($password->password);
 
     } 
+
+    public function test(){
+        // return Password::first()->get();
+        // return 'test';
+        return PasswordResource::collection(Password::all());
+        
+    }
 }

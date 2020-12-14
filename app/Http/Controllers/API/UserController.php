@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
 class UserController extends Controller
@@ -48,4 +49,8 @@ class UserController extends Controller
             'success'    =>  true
         ], 201 );
     } 
+
+    public function loggedInUser(){
+        return new UserResource(Auth::user());
+    }
 }

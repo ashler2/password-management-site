@@ -22,7 +22,10 @@ const store = new Vuex.Store({
             return state.loggedIn;
         },
         getRoles: state => {
-            return state.user.roles
+            return state.user.roles;
+        },
+        isAdmin: (state) => {
+            return state.user.roles ? state.user.roles.filter(item => item.id === 1).length > 0 : null;
         }
     }
 });

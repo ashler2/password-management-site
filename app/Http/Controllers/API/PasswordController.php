@@ -5,10 +5,12 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Password;
+use App\Models\User;
 use App\Http\Resources\Password as PasswordResource;
 use App\Http\Resources\Passwords;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Auth;
+use Throwable;
 
 
 class PasswordController extends Controller
@@ -95,10 +97,39 @@ class PasswordController extends Controller
 
     } 
 
-    public function test(){
-        // return Password::first()->get();
-        // return 'test';
+    public function allPasswords(){
         return PasswordResource::collection(Password::all());
-        
+    }
+
+    public function addPasswordToUser(Request $request){
+        $user       =   User::where('id', $request->user)->first();
+        $password   =   Password::where('id', $request->password)->first();
+
+            if(!$user->passwords->contains($password)){
+                $user->passwords()->attach($password);
+                return response()->json([
+                    'status'    =>  'Password Successfully added',
+                    'password'  =>  $password
+                ], 201);
+            }
+           
+
+            return response()->json([
+                'status'    => 'Password Failed to add',
+                'Error'     => 'Password Already Exists.'
+            ], 204);
+
+
+    }
+
+    public function removePasswordFromUser(Request $request){ 
+        $user       =   User::where('id', $request->user)->first();
+        $password   =   Password::where('id', $request->password)->first();
+        $user->passwords()->detach($password);
+        return response()->json([
+            'status'    =>  'Password Successfully removed',
+            'password'  =>  $password
+        ], 201);
+        return [$user, $password];
     }
 }

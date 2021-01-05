@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
@@ -18,6 +19,21 @@ class UserController extends Controller
     public function show(Request $request, User $user){
 
         return new UserResource($user);
+    }
+    
+    public function store (Request $request){ 
+
+        $user = User::create([
+            'name'  =>  $request->user['name'],
+            'email' =>  $request->user['email'],
+            'password'  =>  Hash::make($request->user['password']),
+        ]);
+
+        return $user ?  response()->json([
+            'user' => $user
+            ]) : response()->json([
+                'error' =>  'error'
+            ]);
     }
 
    /**

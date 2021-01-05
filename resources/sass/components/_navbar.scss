@@ -1,0 +1,120 @@
+.navbar {
+    background-color: $bg-primary;
+    padding: 20px 0px;
+    color: #ffffff;
+
+    a {
+        color: #ffffff;
+        font-family: 'Arimo', sans-serif;
+
+    }
+
+    &__logo {
+        font-family: 'Arimo', sans-serif;
+        font-weight: 700;
+        font-size: 40px;
+    }
+
+    &__links {
+
+
+        
+    }
+
+    &-trigger {
+        width: 45px;
+        height: 45px;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+
+        @media (max-width: 769px){ 
+            display: flex;
+        }
+
+        &__lines {
+            position: relative;
+            background-color: #ffffff;
+            width: 25px;
+            height: 3px;
+            transition: ease 0.4s;
+            opacity: 1;
+
+            &:before,
+            &:after {
+                content: '';
+                position: absolute;
+                left: 0;
+                background-color: #ffffff;
+                width: 100%;
+                height: 3px;
+                transition: ease 0.4s;
+
+            }
+
+            &::before {
+                top: -9px;
+            }
+            &::after {
+                bottom: -9px;
+            }
+        }
+    }
+
+    &-wrapper {
+        background-color: $bg-primary;
+        z-index: 10;
+        transition: ease 0.4s;
+
+        @media (max-width: 769px) {
+            position: fixed;
+            right: 0;
+            width: 100vw;
+            height: calc(100vh - 125px);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            top: 125px;
+            transform: translateX(100%);
+            text-align: center;
+            a {
+                font-size: 24px;
+            }
+            span {
+                width: 100%;
+                display: block;
+            }
+            div {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+        }
+
+        a {
+            font-family: 'Arimo', sans-serif;
+            font-size: 18px;
+        }
+    }
+
+    &--active {
+        .navbar-wrapper {
+            transform: translateX(0);
+        }
+        .navbar-trigger {
+            &__lines {
+                background-color: $bg-primary;
+                &::before {
+                    top: 0; 
+                    transform: rotate(45deg);
+                }
+                &::after {
+                    bottom: 0; 
+                    transform: rotate(-45deg);
+                }
+            }
+        }
+    }
+}

@@ -1,11 +1,24 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600&display=swap');
 
 // Variables
 @import 'variables';
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+// Base
+@import './base';
+@import './typography';
+
+// Pages
+@import './pages/login';
+
+// Components
+
+@import './components/navbar';
 
 
 .c-create-popup {

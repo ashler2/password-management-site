@@ -1,41 +1,34 @@
 <template>
-    <div class="row justify-content-center">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header" style="position: relative;">
-                    Login
-                </div>
 
-                <div class="card-body">
-                    <form action="" @submit.prevent="handleLogin">
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">Email Address</label>
+    <section class="login-page">
+        <div class="container">
+            <div class=" login">
+                <h3 class="login__title">Log in to Ashlane</h3>
+                <form action="" @submit.prevent="handleLogin">
+                    <div class="">
+                        <label for="email" class="">Log in with your email.</label>
+                        <input id="email" type="email" class="" name="email" v-model="formData.email" required autocomplete="email" placeholder="Enter your email address..." autofocus>
+                    </div>
+                    <div class="">
+                        <label for="password" class="">Password</label>
+                        <input id="password" type="password" class="" name="password" v-model="formData.password" required autocomplete="current-password">
+                    </div>
+                    <div class="" v-if="message.length">
+                        <div class="alert alert-danger">
+                            {{message}}
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" v-model="formData.email" required autocomplete="email" autofocus>
-                            </div>
                         </div>
+                    </div>
 
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" v-model="formData.password" required autocomplete="current-password">
-                            </div>
-                        </div>
-                        <div class="form-group row" v-if="message.length">
-                            <div class="alert alert-danger">
-                                {{message}}
-
-                            </div>
-                        </div>
-
-                        <button type="submit">Submit</button>
-                    </form>
-                </div>
+                    <button type="submit" v-if="!this.nextButton" >Submit</button>
+                    <button class="btn btn--full" v-if="this.nextButton" @click="nextInput">Next</button>
+                </form>
+                
             </div>
         </div>
-    </div>
+
+    </section>
+
 </template>
 
 <script>
@@ -49,9 +42,11 @@ export default {
             formData: {
                 email:'',
                 password:''
-
             },
-            message: ''
+            message: '',
+            nextButton: true,
+
+
         };
     }, 
     mounted () {

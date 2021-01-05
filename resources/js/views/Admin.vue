@@ -9,6 +9,26 @@
                 <div class="card-body">
                     <users-admin :users="users"></users-admin>
                 </div>
+                <div class="">
+                    <button @click="toggleCreateUser">Create User</button>
+                    <div class="" v-if="addUser">
+                        Create User
+
+                        <div class="">
+                            <label for="">Name</label>
+                            <input type="text" name="" id="" v-model="newUser.name">
+                        </div>
+                        <div class="">
+                            <label for="">email</label>
+                            <input type="email" name="" id="" v-model="newUser.email">
+                        </div>
+                        <div class="">
+                            <label for="">Password</label>
+                            <input type="password" name="" id="" v-model="newUser.password">
+                        </div>
+                        <button @click="createUser">Create</button>
+                    </div>
+                </div>
 
                 <div class="">Create Permissions</div>
 
@@ -20,7 +40,7 @@
 
 <script>
 import axios from 'axios';
-import {GET_USERS} from '../endpoints/endpoints.js';
+import {GET_USERS,CREATE_USER} from '../endpoints/endpoints.js';
 export default {
 
     methods: {
@@ -28,6 +48,16 @@ export default {
             axios.get(GET_USERS).then(({data:{data}}) => {
                 this.users  = data;
             });
+        },
+        toggleCreateUser() {
+            this.addUser = !this.addUser;
+        },
+        createUser(){
+            axios.post(CREATE_USER, {
+                user: this.newUser
+            }).then(res => {
+                console.log(res)
+            })
         }
     },
     mounted() {
@@ -35,7 +65,11 @@ export default {
     },
     data() {
         return {
-            users: []
+            users: [],
+            addUser: false,
+            newUser: {
+
+            }
         };
     },
     

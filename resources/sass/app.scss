@@ -15,10 +15,13 @@
 
 // Pages
 @import './pages/login';
+@import './pages/home';
+@import './pages/activity';
 
 // Components
 
 @import './components/navbar';
+@import './components/password-card';
 
 
 .c-create-popup {

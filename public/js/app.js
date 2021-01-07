@@ -1955,8 +1955,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       this.current = this.categories.filter(function (category) {
-        console.log(category);
-
+        // console.log(category);
+        // TODO
         if (category.id === _this2.currentCategoryId) {
           return category;
         }
@@ -2087,6 +2087,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2150,6 +2160,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2160,7 +2176,8 @@ __webpack_require__.r(__webpack_exports__);
         name: '',
         email: '',
         login: '',
-        password: ''
+        password: '',
+        website: ''
       }
     };
   },
@@ -2219,7 +2236,6 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     showPassword: function showPassword() {
       this.getPassword();
-      console.log(this.type === 'password');
       this.type = this.type === 'password' ? 'text' : 'password';
     },
     getPassword: function getPassword() {
@@ -2304,16 +2320,22 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
-    deleteUser: function deleteUser(userId) {
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"](Object(_endpoints_endpoints_js__WEBPACK_IMPORTED_MODULE_1__["DELETE_USER"])(userId)).then(function (res) {
-        console.log(res);
+    deleteUser: function deleteUser(userId, index) {
+      var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"](Object(_endpoints_endpoints_js__WEBPACK_IMPORTED_MODULE_1__["DELETE_USER"])(userId)).then(function (_ref) {
+        var data = _ref.data;
+
+        if (data === 1) {
+          _this.usersArr.splice(index, 1);
+        }
       });
     },
     banUser: function banUser(userId) {
-      var _this = this;
+      var _this2 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(Object(_endpoints_endpoints_js__WEBPACK_IMPORTED_MODULE_1__["BAN_USER"])(userId)).then(function (res) {
-        _this.usersArr.map(function (user) {
+        _this2.usersArr.map(function (user) {
           if (user.id === userId) {
             user.banned = true;
           }
@@ -2324,10 +2346,10 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     unbanUser: function unbanUser(userId) {
-      var _this2 = this;
+      var _this3 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(Object(_endpoints_endpoints_js__WEBPACK_IMPORTED_MODULE_1__["UNBAN_USER"])(userId)).then(function (res) {
-        _this2.usersArr.map(function (user) {
+        _this3.usersArr.map(function (user) {
           if (user.id === userId) {
             user.banned = false;
           }
@@ -2415,7 +2437,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     closeNav: function closeNav() {
       this.navActive = false;
-      console.log(this.navActive);
     }
   }),
   mounted: function mounted() {},
@@ -2583,14 +2604,23 @@ __webpack_require__.r(__webpack_exports__);
         _this.users = data;
       });
     },
+    getRoles: function getRoles() {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get();
+    },
     toggleCreateUser: function toggleCreateUser() {
       this.addUser = !this.addUser;
     },
     createUser: function createUser() {
+      var _this2 = this;
+
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(_endpoints_endpoints_js__WEBPACK_IMPORTED_MODULE_1__["CREATE_USER"], {
         user: this.newUser
-      }).then(function (res) {
-        console.log(res);
+      }).then(function (_ref2) {
+        var user = _ref2.data.user;
+
+        _this2.users.push(user);
+
+        _this2.newUser = {};
       });
     }
   },
@@ -2815,6 +2845,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
 
 axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.withCredentials = true;
 
@@ -2836,6 +2870,10 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.withCredentials = true;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(_endpoints_endpoints__WEBPACK_IMPORTED_MODULE_2__["GET_PASSWORDS"]).then(function (_ref) {
         var data = _ref.data.data;
+        data.map(function (password) {
+          password.last_used = password.last_used[0];
+          return password;
+        });
         _this.passwords = data;
       });
     },
@@ -2938,7 +2976,8 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.withCredentials = true;
           _this.message = error.response.data.message;
         });
       });
-    }
+    },
+    nextInput: function nextInput() {}
   })
 });
 
@@ -39003,29 +39042,49 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "div",
-    {},
+    "router-link",
+    {
+      staticClass: "password-card",
+      attrs: {
+        to: {
+          name: "Password",
+          params: {
+            password: _vm.password.id
+          }
+        }
+      }
+    },
     [
       _c(
-        "router-link",
-        {
-          attrs: {
-            to: {
-              name: "Password",
-              params: {
-                password: _vm.password.id
-              }
-            }
-          }
-        },
+        "div",
+        { staticClass: "password-card-section password-card-section-first" },
         [
-          _c("h4", {}, [_vm._v(_vm._s(_vm.password.website))]),
+          _c("img", { attrs: { src: _vm.password.website_img, alt: "" } }),
           _vm._v(" "),
-          _c("h5", [_vm._v(_vm._s(_vm.password.login))])
+          _c("div", { staticClass: "password-card-section-first__content" }, [
+            _c("span", [_vm._v(_vm._s(_vm.password.name))]),
+            _vm._v(" "),
+            _c("span", [_vm._v(_vm._s(_vm.password.login))])
+          ])
         ]
-      )
-    ],
-    1
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "password-card-section" }, [
+        _vm._v("\n        Category TODO\n    ")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "password-card-section" }, [
+        _c("span", [
+          _vm._v(
+            _vm._s(
+              _vm.password.last_used !== undefined
+                ? _vm.password.last_used.viewed_at
+                : "Never Viewed"
+            )
+          )
+        ])
+      ])
+    ]
   )
 }
 var staticRenderFns = []
@@ -39109,6 +39168,46 @@ var render = function() {
                           return
                         }
                         _vm.$set(_vm.form, "name", $event.target.value)
+                      }
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group row" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass: "col-md-4 col-form-label text-md-right",
+                    attrs: { for: "password_website" }
+                  },
+                  [_vm._v("Website url")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-8" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.website,
+                        expression: "form.website"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      id: "password_website",
+                      type: "text",
+                      name: "password_website",
+                      required: ""
+                    },
+                    domProps: { value: _vm.form.website },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.form, "website", $event.target.value)
                       }
                     }
                   })
@@ -39372,7 +39471,7 @@ var render = function() {
                     attrs: { href: "" },
                     on: {
                       click: function($event) {
-                        return _vm.deleteUser(user.id)
+                        return _vm.deleteUser(user.id, index)
                       }
                     }
                   },
@@ -39434,9 +39533,13 @@ var render = function() {
           "div",
           { staticClass: "navbar__logo" },
           [
-            _c("router-link", { attrs: { to: { name: "Login" } } }, [
-              _c("span", [_vm._v("Ashlane")])
-            ])
+            _c(
+              "router-link",
+              {
+                attrs: { to: { name: !this.isLoggedIn() ? "Login" : "Home" } }
+              },
+              [_c("span", [_vm._v("Ashlane")])]
+            )
           ],
           1
         ),
@@ -39545,89 +39648,83 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "row justify-content-center" }, [
-    _c("div", { staticClass: "col-md-12" }, [
-      _c("div", { staticClass: "card" }, [
+  return _c("section", { staticClass: "activity-page" }, [
+    _c("div", { staticClass: "container " }, [
+      _c("div", { staticClass: "activity-header" }, [
+        _c("h3", { staticClass: "activity-header__title" }, [
+          _vm._v("Actvity")
+        ]),
+        _vm._v(" "),
         _c(
-          "div",
-          { staticClass: "card-header", staticStyle: { position: "relative" } },
-          [
-            _c("h4", [_vm._v("Actvity")]),
-            _vm._v(" "),
-            _c(
-              "select",
+          "select",
+          {
+            directives: [
               {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.selectedUser,
-                    expression: "selectedUser"
-                  }
-                ],
-                on: {
-                  change: [
-                    function($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function(o) {
-                          return o.selected
-                        })
-                        .map(function(o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.selectedUser = $event.target.multiple
-                        ? $$selectedVal
-                        : $$selectedVal[0]
-                    },
-                    _vm.getAcivityByUser
-                  ]
-                }
-              },
+                name: "model",
+                rawName: "v-model",
+                value: _vm.selectedUser,
+                expression: "selectedUser"
+              }
+            ],
+            on: {
+              change: [
+                function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.selectedUser = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                },
+                _vm.getAcivityByUser
+              ]
+            }
+          },
+          [
+            _c("option", { attrs: { value: "" } }, [_vm._v("All Activity")]),
+            _vm._v(" "),
+            _vm._l(_vm.users, function(user, index) {
+              return _c(
+                "option",
+                { key: index, domProps: { value: user.id } },
+                [_vm._v(_vm._s(user.name))]
+              )
+            })
+          ],
+          2
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "activity-content" }, [
+        !_vm.activities.length
+          ? _c("div", {}, [
+              _vm._v(
+                "\n                No Activity found for the current user.\n            "
+              )
+            ])
+          : _c(
+              "table",
+              { staticStyle: { width: "100%" } },
               [
-                _c("option", { attrs: { value: "" } }, [
-                  _vm._v("All Activity")
-                ]),
+                _vm._m(0),
                 _vm._v(" "),
-                _vm._l(_vm.users, function(user, index) {
-                  return _c(
-                    "option",
-                    { key: index, domProps: { value: user.id } },
-                    [_vm._v(_vm._s(user.name))]
-                  )
+                _vm._l(_vm.activities, function(activity, index) {
+                  return _c("tr", { key: index }, [
+                    _c("td", [_vm._v(_vm._s(activity.user.name))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(activity.password))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(activity.viewed_at))])
+                  ])
                 })
               ],
               2
             )
-          ]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-body" }, [
-          !_vm.activities.length
-            ? _c("div", {}, [
-                _vm._v(
-                  "\n                    No Activity found for the current user.\n                "
-                )
-              ])
-            : _c(
-                "table",
-                { staticStyle: { width: "100%" } },
-                [
-                  _vm._m(0),
-                  _vm._v(" "),
-                  _vm._l(_vm.activities, function(activity, index) {
-                    return _c("tr", { key: index }, [
-                      _c("td", [_vm._v(_vm._s(activity.user.name))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(activity.password))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(activity.viewed_at))])
-                    ])
-                  })
-                ],
-                2
-              )
-        ])
       ])
     ])
   ])
@@ -40033,21 +40130,28 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "row justify-content-center" }, [
-    _c("div", { staticClass: "col-md-12" }, [
-      _c("div", { staticClass: "card" }, [
+  return _c("section", { staticClass: "home-page" }, [
+    _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "home-page__title" }, [
+        _c("h2", [_vm._v("Passwords")]),
+        _vm._v(" "),
         _c(
           "div",
-          { staticClass: "card-header", staticStyle: { position: "relative" } },
+          {},
           [
-            _c("h4", [_vm._v("Passwords")]),
-            _vm._v(" "),
             this.isAdmin()
-              ? _c("button", { on: { click: _vm.toggleCreatePassword } }, [
-                  _vm._v(
-                    "\n                    Create Password\n                "
-                  )
-                ])
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "btn",
+                    on: { click: _vm.toggleCreatePassword }
+                  },
+                  [
+                    _vm._v(
+                      "\n                    Create Password\n                "
+                    )
+                  ]
+                )
               : _vm._e(),
             _vm._v(" "),
             _c("password-create", {
@@ -40055,24 +40159,41 @@ var render = function() {
             })
           ],
           1
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "card-body" },
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "password-section" },
+        [
+          _vm._m(0),
+          _vm._v(" "),
           _vm._l(_vm.passwords, function(password, index) {
             return _c("password-card", {
               key: index,
               attrs: { password: password }
             })
-          }),
-          1
-        )
-      ])
+          })
+        ],
+        2
+      )
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "password-section__header" }, [
+      _c("h3", [_vm._v("Name")]),
+      _vm._v(" "),
+      _c("h3", [_vm._v("Category")]),
+      _vm._v(" "),
+      _c("h3", [_vm._v("Last Used")])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -40095,7 +40216,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("section", { staticClass: "login-page" }, [
-    _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "container login-page-container" }, [
       _c("div", { staticClass: " login" }, [
         _c("h3", { staticClass: "login__title" }, [
           _vm._v("Log in to Ashlane")
@@ -40113,7 +40234,7 @@ var render = function() {
             }
           },
           [
-            _c("div", {}, [
+            _c("div", { staticClass: "form-section" }, [
               _c("label", { attrs: { for: "email" } }, [
                 _vm._v("Log in with your email.")
               ]),
@@ -40148,8 +40269,10 @@ var render = function() {
               })
             ]),
             _vm._v(" "),
-            _c("div", {}, [
-              _c("label", { attrs: { for: "password" } }, [_vm._v("Password")]),
+            _c("div", { staticClass: "form-section" }, [
+              _c("label", { attrs: { for: "password" } }, [
+                _vm._v("Enter your password")
+              ]),
               _vm._v(" "),
               _c("input", {
                 directives: [
@@ -40165,6 +40288,7 @@ var render = function() {
                   type: "password",
                   name: "password",
                   required: "",
+                  placeholder: "Enter your password...",
                   autocomplete: "current-password"
                 },
                 domProps: { value: _vm.formData.password },
@@ -40191,20 +40315,11 @@ var render = function() {
                 ])
               : _vm._e(),
             _vm._v(" "),
-            !this.nextButton
-              ? _c("button", { attrs: { type: "submit" } }, [_vm._v("Submit")])
-              : _vm._e(),
-            _vm._v(" "),
-            this.nextButton
-              ? _c(
-                  "button",
-                  {
-                    staticClass: "btn btn--full",
-                    on: { click: _vm.nextInput }
-                  },
-                  [_vm._v("Next")]
-                )
-              : _vm._e()
+            _c(
+              "button",
+              { staticClass: "btn btn--full", attrs: { type: "submit" } },
+              [_vm._v("Submit")]
+            )
           ]
         )
       ])

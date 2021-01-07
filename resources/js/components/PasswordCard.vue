@@ -1,15 +1,25 @@
 <template>
 
-<div class="">
     <router-link 
     :to="{name: 'Password', 
     params: {
         password: password.id
-    }}" class="" >
-        <h4 class="">{{password.website}}</h4>
-        <h5>{{password.login}}</h5>
+    }}" class="password-card" >
+        <div class="password-card-section password-card-section-first">
+            <img :src="password.website_img" alt=""> 
+            <div class="password-card-section-first__content">
+                <span>{{password.name}}</span>
+                <span>{{password.login}}</span>
+            </div> 
+        </div>
+        <div class="password-card-section">
+            Category TODO
+        </div>
+        <div class="password-card-section">
+            <span>{{password.last_used !== undefined ? password.last_used.viewed_at : 'Never Viewed'  }}</span>
+        </div>
     </router-link>
-</div>
+
 
 </template>
 

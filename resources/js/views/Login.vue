@@ -1,17 +1,17 @@
 <template>
 
     <section class="login-page">
-        <div class="container">
+        <div class="container login-page-container">
             <div class=" login">
                 <h3 class="login__title">Log in to Ashlane</h3>
                 <form action="" @submit.prevent="handleLogin">
-                    <div class="">
+                    <div class="form-section">
                         <label for="email" class="">Log in with your email.</label>
                         <input id="email" type="email" class="" name="email" v-model="formData.email" required autocomplete="email" placeholder="Enter your email address..." autofocus>
                     </div>
-                    <div class="">
-                        <label for="password" class="">Password</label>
-                        <input id="password" type="password" class="" name="password" v-model="formData.password" required autocomplete="current-password">
+                    <div class="form-section">
+                        <label for="password" class="">Enter your password</label>
+                        <input id="password" type="password" class="" name="password" v-model="formData.password" required placeholder="Enter your password..." autocomplete="current-password">
                     </div>
                     <div class="" v-if="message.length">
                         <div class="alert alert-danger">
@@ -20,8 +20,8 @@
                         </div>
                     </div>
 
-                    <button type="submit" v-if="!this.nextButton" >Submit</button>
-                    <button class="btn btn--full" v-if="this.nextButton" @click="nextInput">Next</button>
+                    <button type="submit" class="btn btn--full" >Submit</button>
+                    <!-- <button class="btn btn--full" v-if="this.nextButton" @click="nextInput">Next</button> -->
                 </form>
                 
             </div>
@@ -69,6 +69,9 @@ export default {
 
                 });
             });
+        },
+        nextInput () {
+
         }
 
     }

@@ -49,14 +49,18 @@ export default {
                 this.users  = data;
             });
         },
+        getRoles() {
+            axios.get()
+        },
         toggleCreateUser() {
             this.addUser = !this.addUser;
         },
         createUser(){
             axios.post(CREATE_USER, {
                 user: this.newUser
-            }).then(res => {
-                console.log(res)
+            }).then(({data: {user}}) => {
+                this.users.push(user);
+                this.newUser = {};
             })
         }
     },

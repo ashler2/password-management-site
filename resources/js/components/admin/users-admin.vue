@@ -21,7 +21,7 @@
                     <button href="" class="btn" @click="banUser(user.id)" v-if="!user.banned">Ban</button>
                     <button href="" class="btn" @click="unbanUser(user.id)" v-if="user.banned">unban</button>
 
-                    <button href="" class="btn " @click="deleteUser(user.id)">Delete</button>
+                    <button href="" class="btn " @click="deleteUser(user.id, index)">Delete</button>
                 </td>
             </tr>
 
@@ -53,9 +53,11 @@ export default {
         }
     },
     methods:{
-        deleteUser(userId){
-            axios.delete(DELETE_USER(userId)).then(res => {
-                console.log(res);
+        deleteUser(userId, index){
+            axios.delete(DELETE_USER(userId)).then(({data}) => {
+                if(data === 1) {
+                    this.usersArr.splice(index, 1);
+                }
 
             });
         },

@@ -10898,6 +10898,33 @@ a.text-dark:focus {
   }
 }
 
+.btn {
+  background-color: #0E6476;
+  color: #ffffff;
+  font-size: 18px;
+  padding: 10px 30px;
+  margin-top: 20px;
+  transition: ease 0.4s;
+}
+
+.btn:hover {
+  color: #ffffff;
+  background-color: #0e353d;
+}
+
+.btn--full {
+  width: 100%;
+}
+
+.form-section {
+  margin-bottom: 20px;
+}
+
+section,
+.section {
+  padding: 40px 0px;
+}
+
 h1,
 .h1,
 h2,
@@ -10954,16 +10981,26 @@ input:focus {
   outline: 0;
 }
 
+select:focus {
+  color: #495057;
+  background-color: #fff;
+  border-color: #3e8391;
+  border-width: 2px;
+  outline: 0;
+}
+
 .login-page {
   background-color: #D9E6E9;
   height: calc(100vh - 125px);
-  padding: 40px;
+  padding: 40px 0px;
   display: flex;
   justify-content: center;
 }
 
-.login-page .container {
-  max-width: 700px;
+@media (min-width: 769px) {
+  .login-page-container {
+    max-width: 50%;
+  }
 }
 
 .login {
@@ -10974,6 +11011,52 @@ input:focus {
 .login__title {
   font-size: 32px;
   color: #0E353D;
+}
+
+.home-page {
+  background-color: #D9E6E9;
+  min-height: calc(100vh - 107px);
+}
+
+.home-page__title {
+  display: flex;
+  align-items: center;
+}
+
+.home-page__title h2 {
+  margin-bottom: 0;
+}
+
+.password-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.password-section__header {
+  display: flex;
+}
+
+.home {
+  display: flex;
+}
+
+.activity-page {
+  background-color: #D9E6E9;
+  min-height: calc(100vh - 125px);
+  padding: 40px 0px;
+  display: flex;
+  justify-content: center;
+}
+
+.activity-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.activity-header__title {
+  margin-bottom: 0;
 }
 
 .navbar {
@@ -11094,6 +11177,36 @@ input:focus {
 .navbar--active .navbar-trigger__lines::after {
   bottom: 0;
   transform: rotate(-45deg);
+}
+
+.password-card {
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: #F5F7F7;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+.password-card-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.password-card-section-first img {
+  width: 50px;
+  height: 100%;
+}
+
+.password-card-section-first__content {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  flex-direction: column;
+  margin-left: 15px;
 }
 
 .c-create-popup {

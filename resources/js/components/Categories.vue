@@ -40,7 +40,8 @@ export default {
         },
         getCurrentCategory(){
             this.current = this.categories.filter(category => {
-                console.log(category);
+                // console.log(category);
+                // TODO
                 if(category.id === this.currentCategoryId){
                     return category;
                 };

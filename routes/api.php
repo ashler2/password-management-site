@@ -25,8 +25,8 @@ use App\Http\Resources\Password;
 Route::middleware('auth:sanctum')->group(function () {
     //users
     Route::apiResource('/users', UserController::class);
-    Route::post('/users/{user}/ban', [UserController::class, 'ban']);
-    Route::post('/users/{user}/unban', [UserController::class, 'unban']);
+    Route::post('/users/{user}/ban', [UserController::class, 'ban'])->middleware('can:isAdmin');
+    Route::post('/users/{user}/unban', [UserController::class, 'unban'])->middleware('can:isAdmin');
     Route::get('/user', [UserController::class, 'loggedInUser']);
 
     // passwords

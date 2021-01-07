@@ -24,7 +24,7 @@ export default {
     methods: {
         showPassword (){
             this.getPassword();
-            console.log(this.type === 'password');
+
            this.type = this.type === 'password' ? 'text' : 'password';
         },
         getPassword() {

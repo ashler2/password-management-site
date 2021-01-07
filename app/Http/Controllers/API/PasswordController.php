@@ -7,9 +7,11 @@ use Illuminate\Http\Request;
 use App\Models\Password;
 use App\Models\User;
 use App\Http\Resources\Password as PasswordResource;
-use App\Http\Resources\Passwords;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Gate;
+
 use Throwable;
 
 
@@ -23,6 +25,10 @@ class PasswordController extends Controller
     public function index()
     {
         $user = Auth::user();
+        if(Gate::allows('isAdmin')){
+
+            return PasswordResource::collection(Password::all());
+        }
         return PasswordResource::collection($user->passwords);
 
     }
@@ -35,12 +41,14 @@ class PasswordController extends Controller
      */
     public function store(Request $request)
     {
+
+    
         $password = Password::create([
             'name'  =>  $request->name,
             'password'  =>  Crypt::encryptString($request->password),
             'email' => $request->email,
             'login' =>  $request->login,
-            "password_length"   => Crypt::encryptString(strlen($request->password))
+            "password_length"   => Crypt::encryptString(strlen($request->password)), "image_url"    =>  $this->getPasswordFavicon($request->website)
         ]);
         return $password ? response()->json('success',201) : response('error',500);
 
@@ -131,5 +139,13 @@ class PasswordController extends Controller
             'password'  =>  $password
         ], 201);
         return [$user, $password];
+    }
+
+    public function getPasswordFavicon ($url) {
+        $apiUrl = 'http://favicongrabber.com/api/grab/';
+        $response  = Http::get($apiUrl.$url);
+
+        return $response->json()['icons'][0]['src'];
+
     }
 }

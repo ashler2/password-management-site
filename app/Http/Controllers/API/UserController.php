@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
+use App\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -28,6 +29,9 @@ class UserController extends Controller
             'email' =>  $request->user['email'],
             'password'  =>  Hash::make($request->user['password']),
         ]);
+        // default role 
+        $role = Role::where('id', 2)->first();
+        $user->roles()->attach($role);
 
         return $user ?  response()->json([
             'user' => $user

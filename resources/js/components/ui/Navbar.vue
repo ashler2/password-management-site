@@ -4,7 +4,7 @@
     <nav class="navbar">
         <div class="container">
             <div class="navbar__logo">
-                <router-link :to="{name: 'Login'}">
+                <router-link :to="{name: !this.isLoggedIn() ? 'Login': 'Home'}">
                     <span>Ashlane</span>
                 </router-link>
             </div>
@@ -58,7 +58,6 @@ export default {
         },
         closeNav () {
             this.navActive = false;
-            console.log(this.navActive);
         }
 
     },

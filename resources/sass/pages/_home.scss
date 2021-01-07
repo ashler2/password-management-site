@@ -1,0 +1,30 @@
+.home-page {
+    background-color: $bg-secondary;
+    min-height: calc(100vh - 107px);
+
+    &__title {
+        display: flex;
+        align-items: center;
+
+        h2 {
+            margin-bottom: 0;
+        }
+
+    }
+}
+
+.password-section {
+    display: flex;
+    flex-direction: column;
+
+    &__header {
+        display: flex;
+    }
+}
+
+
+
+.home {
+    display: flex;
+
+}

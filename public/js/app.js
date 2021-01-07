@@ -2087,6 +2087,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2150,6 +2160,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2160,7 +2176,8 @@ __webpack_require__.r(__webpack_exports__);
         name: '',
         email: '',
         login: '',
-        password: ''
+        password: '',
+        website: ''
       }
     };
   },
@@ -2815,6 +2832,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
 
 axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.withCredentials = true;
 
@@ -2836,6 +2857,10 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.withCredentials = true;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(_endpoints_endpoints__WEBPACK_IMPORTED_MODULE_2__["GET_PASSWORDS"]).then(function (_ref) {
         var data = _ref.data.data;
+        data.map(function (password) {
+          password.last_used = password.last_used[0];
+          return password;
+        });
         _this.passwords = data;
       });
     },
@@ -2938,7 +2963,8 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.withCredentials = true;
           _this.message = error.response.data.message;
         });
       });
-    }
+    },
+    nextInput: function nextInput() {}
   })
 });
 
@@ -39003,29 +39029,49 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "div",
-    {},
+    "router-link",
+    {
+      staticClass: "password-card",
+      attrs: {
+        to: {
+          name: "Password",
+          params: {
+            password: _vm.password.id
+          }
+        }
+      }
+    },
     [
       _c(
-        "router-link",
-        {
-          attrs: {
-            to: {
-              name: "Password",
-              params: {
-                password: _vm.password.id
-              }
-            }
-          }
-        },
+        "div",
+        { staticClass: "password-card-section password-card-section-first" },
         [
-          _c("h4", {}, [_vm._v(_vm._s(_vm.password.website))]),
+          _c("img", { attrs: { src: _vm.password.website_img, alt: "" } }),
           _vm._v(" "),
-          _c("h5", [_vm._v(_vm._s(_vm.password.login))])
+          _c("div", { staticClass: "password-card-section-first__content" }, [
+            _c("span", [_vm._v(_vm._s(_vm.password.name))]),
+            _vm._v(" "),
+            _c("span", [_vm._v(_vm._s(_vm.password.login))])
+          ])
         ]
-      )
-    ],
-    1
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "password-card-section" }, [
+        _vm._v("\n        Category TODO\n    ")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "password-card-section" }, [
+        _c("span", [
+          _vm._v(
+            _vm._s(
+              _vm.password.last_used.viewed_at
+                ? _vm.password.last_used.viewed_at
+                : ""
+            )
+          )
+        ])
+      ])
+    ]
   )
 }
 var staticRenderFns = []
@@ -39109,6 +39155,46 @@ var render = function() {
                           return
                         }
                         _vm.$set(_vm.form, "name", $event.target.value)
+                      }
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group row" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass: "col-md-4 col-form-label text-md-right",
+                    attrs: { for: "password_website" }
+                  },
+                  [_vm._v("Website url")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-8" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.website,
+                        expression: "form.website"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      id: "password_website",
+                      type: "text",
+                      name: "password_website",
+                      required: ""
+                    },
+                    domProps: { value: _vm.form.website },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.form, "website", $event.target.value)
                       }
                     }
                   })
@@ -40033,15 +40119,15 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "row justify-content-center" }, [
-    _c("div", { staticClass: "col-md-12" }, [
-      _c("div", { staticClass: "card" }, [
+  return _c("section", { staticClass: "home-page" }, [
+    _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "home-page__title" }, [
+        _c("h2", [_vm._v("Passwords")]),
+        _vm._v(" "),
         _c(
           "div",
-          { staticClass: "card-header", staticStyle: { position: "relative" } },
+          {},
           [
-            _c("h4", [_vm._v("Passwords")]),
-            _vm._v(" "),
             this.isAdmin()
               ? _c("button", { on: { click: _vm.toggleCreatePassword } }, [
                   _vm._v(
@@ -40055,24 +40141,41 @@ var render = function() {
             })
           ],
           1
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "card-body" },
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "password-section" },
+        [
+          _vm._m(0),
+          _vm._v(" "),
           _vm._l(_vm.passwords, function(password, index) {
             return _c("password-card", {
               key: index,
               attrs: { password: password }
             })
-          }),
-          1
-        )
-      ])
+          })
+        ],
+        2
+      )
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "password-section__header" }, [
+      _c("h3", [_vm._v("Name")]),
+      _vm._v(" "),
+      _c("h3", [_vm._v("Category")]),
+      _vm._v(" "),
+      _c("h3", [_vm._v("Last Used")])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -40095,7 +40198,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("section", { staticClass: "login-page" }, [
-    _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "container login-page-container" }, [
       _c("div", { staticClass: " login" }, [
         _c("h3", { staticClass: "login__title" }, [
           _vm._v("Log in to Ashlane")
@@ -40113,7 +40216,7 @@ var render = function() {
             }
           },
           [
-            _c("div", {}, [
+            _c("div", { staticClass: "form-section" }, [
               _c("label", { attrs: { for: "email" } }, [
                 _vm._v("Log in with your email.")
               ]),
@@ -40148,8 +40251,10 @@ var render = function() {
               })
             ]),
             _vm._v(" "),
-            _c("div", {}, [
-              _c("label", { attrs: { for: "password" } }, [_vm._v("Password")]),
+            _c("div", { staticClass: "form-section" }, [
+              _c("label", { attrs: { for: "password" } }, [
+                _vm._v("Enter your password")
+              ]),
               _vm._v(" "),
               _c("input", {
                 directives: [
@@ -40165,6 +40270,7 @@ var render = function() {
                   type: "password",
                   name: "password",
                   required: "",
+                  placeholder: "Enter your password...",
                   autocomplete: "current-password"
                 },
                 domProps: { value: _vm.formData.password },
@@ -40191,20 +40297,11 @@ var render = function() {
                 ])
               : _vm._e(),
             _vm._v(" "),
-            !this.nextButton
-              ? _c("button", { attrs: { type: "submit" } }, [_vm._v("Submit")])
-              : _vm._e(),
-            _vm._v(" "),
-            this.nextButton
-              ? _c(
-                  "button",
-                  {
-                    staticClass: "btn btn--full",
-                    on: { click: _vm.nextInput }
-                  },
-                  [_vm._v("Next")]
-                )
-              : _vm._e()
+            _c(
+              "button",
+              { staticClass: "btn btn--full", attrs: { type: "submit" } },
+              [_vm._v("Submit")]
+            )
           ]
         )
       ])

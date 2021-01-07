@@ -14,6 +14,12 @@
                     </div>
                 </div>
                 <div class="form-group row">
+                    <label for="password_website" class="col-md-4 col-form-label text-md-right">Website url</label>
+                    <div class="col-md-8">
+                        <input id="password_website" type="text" class="form-control" name="password_website" required  v-model="form.website">
+                    </div>
+                </div>
+                <div class="form-group row">
                     <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
                     <div class="col-md-8">
                         <input id="password" type="text" class="form-control" name="password" required v-model="form.password">
@@ -52,7 +58,8 @@
                     name: '',
                     email: '',
                     login: '',
-                    password: ''
+                    password: '',
+                    website: ''
                 }
 
             };

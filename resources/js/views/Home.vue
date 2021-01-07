@@ -1,23 +1,27 @@
 <template>
-    <div class="row justify-content-center">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header" style="position: relative;">
-                    <h4>Passwords</h4>
+    <section class="home-page">
+        <div class="container">
+            <div class="home-page__title">
+                <h2>Passwords</h2>
+                <div class="" >
                     <button @click="toggleCreatePassword" v-if="this.isAdmin()">
                         Create Password
                     </button>
-                        <password-create :currentDisplay="createPassword"></password-create>
-                </div>
-
-                <div class="card-body">
-
-                    <password-card v-for="(password, index) in passwords" :password="password" :key="index"></password-card>
-                    
+                    <password-create :currentDisplay="createPassword"></password-create>
                 </div>
             </div>
+            <div class="password-section">
+                <div class="password-section__header">
+                    <h3>Name</h3>
+                    <h3>Category</h3>
+                    <h3>Last Used</h3>
+
+                </div>
+                <password-card v-for="(password, index) in passwords" :password="password" :key="index"></password-card>
+            </div>
+
         </div>
-    </div>
+    </section>
 </template>
 
 <script>
@@ -41,6 +45,10 @@ export default {
         ...mapGetters(['isAdmin']),
         getPasswords () {
             axios.get(GET_PASSWORDS).then(({data: {data}}) => {
+                data.map(password => {
+                    password.last_used = password.last_used[0]
+                    return password
+                })
                 this.passwords = data;
             });
 

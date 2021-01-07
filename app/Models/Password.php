@@ -21,7 +21,8 @@ class Password extends Model
         'website',
         'notes',
         'category_id',
-        'password_length'
+        'password_length',
+        'image_url'
     ];
     protected $hidden = ["password"];
 
@@ -32,4 +33,5 @@ class Password extends Model
     public function Users() {
         return $this->belongsToMany(User::class, "password_user");
     }
+
 }

@@ -42,13 +42,14 @@ class PasswordController extends Controller
     public function store(Request $request)
     {
 
-    
+        $formattedURL = $this->formatWebsite($request->website);
         $password = Password::create([
             'name'  =>  $request->name,
             'password'  =>  Crypt::encryptString($request->password),
             'email' => $request->email,
             'login' =>  $request->login,
-            "password_length"   => Crypt::encryptString(strlen($request->password)), "image_url"    =>  $this->getPasswordFavicon($request->website)
+            'website'   =>  $formattedURL,
+            "password_length"   => Crypt::encryptString(strlen($request->password)), "image_url"    =>  $this->getPasswordFavicon($formattedURL)
         ]);
         return $password ? response()->json('success',201) : response('error',500);
 
@@ -147,5 +148,11 @@ class PasswordController extends Controller
 
         return $response->json()['icons'][0]['src'];
 
+    }
+
+    public function formatWebsite($websiteURl){
+        $regex  = '/(?<=\/\/)(.*)/i';
+        preg_match($regex, $websiteURl,$matches, );
+        return $matches[0];
     }
 }

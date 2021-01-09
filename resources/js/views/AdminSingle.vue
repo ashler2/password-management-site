@@ -75,7 +75,7 @@ export default {
                 user: this.user.id,
                 password: this.passwordToAdd
             }).then(res => { 
-                console.log(res);
+
                 if(res.status === 201){
                     this.user.passwords.push(res.data.password)
                 } 
@@ -107,7 +107,6 @@ export default {
         allPasswordsExcludingActive () {
 
             let passwords =  this.user.passwords.map(password => password.id);
-            console.log(passwords)
             return this.allPasswords.filter((el) => {
                return passwords.indexOf(el.id) < 0 ;
             })            

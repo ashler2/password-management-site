@@ -1,41 +1,38 @@
 <template>
-     <div class="row justify-content-center">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header" style="position: relative;">
-                    Admin Area
-                </div>
 
-                <div class="card-body">
-                    <users-admin :users="users"></users-admin>
+<section class="admin-page">
+    <div class="container">
+        <h2>Admin Area</h2>
+        <div class="">
+            <users-admin :users="users"></users-admin>
+        </div>
+
+        <div class="">
+            <div class="">
+                <h2>Create User</h2>
+                <button class="btn" @click="toggleCreateUser">Create User</button>
+            </div>
+            <div class="" v-if="addUser">
+                <div class="">
+                    <label for="">Name</label>
+                    <input type="text" name="" id="" v-model="newUser.name">
                 </div>
                 <div class="">
-                    <button @click="toggleCreateUser">Create User</button>
-                    <div class="" v-if="addUser">
-                        Create User
-
-                        <div class="">
-                            <label for="">Name</label>
-                            <input type="text" name="" id="" v-model="newUser.name">
-                        </div>
-                        <div class="">
-                            <label for="">email</label>
-                            <input type="email" name="" id="" v-model="newUser.email">
-                        </div>
-                        <div class="">
-                            <label for="">Password</label>
-                            <input type="password" name="" id="" v-model="newUser.password">
-                        </div>
-                        <button @click="createUser">Create</button>
-                    </div>
+                    <label for="">email</label>
+                    <input type="email" name="" id="" v-model="newUser.email">
                 </div>
-
-                <div class="">Create Permissions</div>
-
-                <div class="">Assign role fast area</div>
+                <div class="">
+                    <label for="">Password</label>
+                    <input type="password" name="" id="" v-model="newUser.password">
+                </div>
+                <button class="btn" @click="createUser">Create</button>
             </div>
         </div>
+        <div class="">Create Permissions </div>
+        <div class="">Assign role fast area</div>
     </div>
+</section>
+     
 </template>
 
 <script>

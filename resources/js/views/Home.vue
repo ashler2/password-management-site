@@ -10,6 +10,10 @@
                     <password-create :currentDisplay="createPassword"></password-create>
                 </div>
             </div>
+            <div class="">
+                <h3>Search</h3>
+                <input type="text" v-model="search">
+            </div>
             <div class="password-section">
                 <div class="password-section__header">
                     <h3>Name</h3>
@@ -17,7 +21,7 @@
                     <h3>Last Used</h3>
 
                 </div>
-                <password-card v-for="(password, index) in passwords" :password="password" :key="index"></password-card>
+                <password-card v-for="(password, index) in (this.search.lenght ? passwords :searchedPassword )" :password="password" :key="index"></password-card>
             </div>
 
         </div>
@@ -35,7 +39,8 @@ export default {
         return {
             passwords: [],
             createPassword: false,
-            user: null
+            user: null,
+            search: ''
         };
     }, 
     mounted () {
@@ -55,6 +60,20 @@ export default {
         },
         toggleCreatePassword () {
             this.createPassword = !this.createPassword;
+        },
+
+    },
+    computed : {
+        searchedPassword: function () {
+            if(this.passwords.length){
+                return this.passwords.filter(password => {
+                    console.log(typeof password.name)
+                    if(password.name.toLowerCase().includes(this.search.toLowerCase())){
+                        return password
+                }
+                })
+            }
+            return [];
         }
     }
 };

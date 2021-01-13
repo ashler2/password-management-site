@@ -23,8 +23,18 @@
                     <th>Viewed At</th>
                 </tr>
                 <tr v-for="(activity, index) in activities" :key="index">
-                    <td>{{activity.user.name}}</td>
-                    <td>{{activity.password}}</td>
+                    <td>
+                        <router-link 
+                            :to="{name: 'Admin-Single', params: { user:activity.user.id}}"  >
+                            {{activity.user.name}}
+                        </router-link>
+                    </td>
+                    <td>
+                        <router-link 
+                        :to="{name: 'Password', params: { password: activity.password.id}}"  >
+                            {{activity.password.name}}
+                        </router-link>
+                    </td>
                     <td>{{activity.viewed_at}}</td>
                 </tr>  
 

@@ -13,7 +13,7 @@
             </div> 
         </div>
         <div class="password-card-section">
-            Category TODO
+            {{password.category.screen_name}}
         </div>
         <div class="password-card-section">
             <span>{{password.last_used !== undefined ? password.last_used.viewed_at : 'Never Viewed'  }}</span>

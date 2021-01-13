@@ -14,7 +14,7 @@ class AddCategoryColumnToPasswordsTable extends Migration
     public function up()
     {
         Schema::table('passwords', function (Blueprint $table) {
-            $table->bigInteger('category_id')->unsigned()->nullable();
+            $table->bigInteger('category_id')->unsigned()->default(3);
             $table->foreign('category_id')->references('id')->on('categories');
         });
     }

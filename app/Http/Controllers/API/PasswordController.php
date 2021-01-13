@@ -49,7 +49,9 @@ class PasswordController extends Controller
             'email' => $request->email,
             'login' =>  $request->login,
             'website'   =>  $formattedURL,
-            "password_length"   => Crypt::encryptString(strlen($request->password)), "image_url"    =>  $this->getPasswordFavicon($formattedURL)
+            "password_length"   => Crypt::encryptString(strlen($request->password)), "image_url"    =>  $this->getPasswordFavicon($formattedURL),
+            'notes'     =>  $request->notes,
+            "category_id" =>   $request->category
         ]);
         return $password ? response()->json('success',201) : response('error',500);
 
@@ -76,13 +78,17 @@ class PasswordController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $formattedURL = $this->formatWebsite($request->website);
+        
         $password = Password::where('id', $id)->update([
             'name'  =>  $request->name,
             'password'  =>  Crypt::encryptString($request->password),
             'email' => $request->email,
             'login' =>  $request->login,
-            "password_length"   => Crypt::encryptString(strlen($request->password)),
-            ''
+            'website'   =>  $formattedURL,
+            "password_length"   => Crypt::encryptString(strlen($request->password)), "image_url"    =>  $this->getPasswordFavicon($formattedURL),
+            'notes'     =>  $request->notes,
+            "category_id" =>   $request->category
         ]);
         $password->update($request);
         return [$password, $id];

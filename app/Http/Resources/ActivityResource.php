@@ -18,7 +18,7 @@ class ActivityResource extends JsonResource
     {
         return [
             'user'  => User::where('id',$this->user_id)->first(),
-            'password'  => $this->password_id,
+            'password'  => Password::where('id', $this->password_id)->first(),
             'viewed_at' =>  $this->viewed_at
         ];
     }

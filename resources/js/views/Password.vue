@@ -32,7 +32,7 @@
                 </div>
             </div>
     
-            <categories :currentCategory="password.category_id"></categories>
+            <categories :currentCategory="password.category.id"></categories>
 
             <div class="form-group row">
                 <label for="notes" class="col-md-4 col-form-label text-md-right">Notes</label>

@@ -5,9 +5,14 @@
                 <h2>Passwords</h2>
                 <div class="" >
                     <button class="btn" @click="toggleCreatePassword" v-if="this.isAdmin()">
-                        Create Password
+                        Fast create
                     </button>
                     <password-create :currentDisplay="createPassword"></password-create>
+                    <router-link 
+                    :to="{name: 'Password-Create'}"
+                    class="btn">
+                        Create Password
+                    </router-link>
                 </div>
             </div>
             <div class="">
@@ -67,7 +72,6 @@ export default {
         searchedPassword: function () {
             if(this.passwords.length){
                 return this.passwords.filter(password => {
-                    console.log(typeof password.name)
                     if(password.name.toLowerCase().includes(this.search.toLowerCase())){
                         return password
                 }

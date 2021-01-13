@@ -7,6 +7,7 @@ import Login from '../views/Login.vue';
 import Activity from '../views/Activity.vue';
 import Admin from '../views/Admin.vue';
 import AdminSingle from '../views/AdminSingle';
+import PasswordCreatePage from '../views/PasswordCreatePage';
 
 
 
@@ -26,6 +27,11 @@ const routes = [
         path: '/password/:password',
         name: 'Password',
         component: Password
+    },
+    {
+        path: '/password/create',
+        name: 'Password-Create',
+        component: PasswordCreatePage
     },
     {
         path: '/activity',

@@ -1930,12 +1930,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   model: {
-    prop: 'value',
-    event: 'change'
+    prop: "value",
+    event: "change"
   },
   props: {
     currentCategory: {
@@ -1977,8 +1986,6 @@ __webpack_require__.r(__webpack_exports__);
         if (category.id === _this3.currentCategoryId) {
           return category;
         }
-
-        ;
       });
     }
   },
@@ -2066,12 +2073,78 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {},
   data: function data() {
     return {
       testData: {
-        testField: 'string'
+        testField: "string"
       },
       testData2: null
     };
@@ -2092,6 +2165,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _endpoints_endpoints__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../endpoints/endpoints */ "./resources/js/endpoints/endpoints.js");
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2186,6 +2264,57 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2193,11 +2322,11 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       form: {
-        name: '',
-        email: '',
-        login: '',
-        password: '',
-        website: ''
+        name: "",
+        email: "",
+        login: "",
+        password: "",
+        website: ""
       }
     };
   },
@@ -2209,7 +2338,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(_endpoints_endpoints_js__WEBPACK_IMPORTED_MODULE_1__["POST_PASSWORD"], this.form).then(function (res) {
-        res.status === 201 ? _this.$parent.toggleCreatePassword() : alert('error');
+        res.status === 201 ? _this.$parent.toggleCreatePassword() : alert("error");
 
         _this.$parent.getPasswords();
       });
@@ -2238,8 +2367,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2250,13 +2377,13 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       type: "password",
-      password: ''
+      password: ""
     };
   },
   methods: {
     showPassword: function showPassword() {
       this.getPassword();
-      this.type = this.type === 'password' ? 'text' : 'password';
+      this.type = this.type === "password" ? "text" : "password";
     },
     getPassword: function getPassword() {
       var _this = this;
@@ -2320,6 +2447,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2335,7 +2483,7 @@ __webpack_require__.r(__webpack_exports__);
         return this.users;
       },
       set: function set(v) {
-        this.$emit('input', v);
+        this.$emit("input", v);
       }
     }
   },
@@ -2360,7 +2508,6 @@ __webpack_require__.r(__webpack_exports__);
             user.banned = true;
           }
 
-          ;
           return user;
         });
       });
@@ -2374,7 +2521,6 @@ __webpack_require__.r(__webpack_exports__);
             user.banned = false;
           }
 
-          ;
           return user;
         });
       });
@@ -2444,6 +2590,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2451,7 +2602,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       navActive: false
     };
   },
-  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['isAdmin', 'isLoggedIn'])), {}, {
+  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["isAdmin", "isLoggedIn"])), {}, {
     toggleNav: function toggleNav() {
       this.navActive = !this.navActive;
     },
@@ -2526,6 +2677,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2533,7 +2687,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       activities: [],
       users: [],
-      selectedUser: ''
+      selectedUser: ""
     };
   },
   mounted: function mounted() {
@@ -2582,8 +2736,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _endpoints_endpoints_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../endpoints/endpoints.js */ "./resources/js/endpoints/endpoints.js");
-//
-//
 //
 //
 //
@@ -2722,6 +2874,33 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2732,7 +2911,7 @@ __webpack_require__.r(__webpack_exports__);
         passwords: []
       },
       allPasswords: [],
-      passwordToAdd: ''
+      passwordToAdd: ""
     };
   },
   methods: {
@@ -2819,7 +2998,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     userId: Object
@@ -2882,6 +3060,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.withCredentials = true;
 
@@ -2892,13 +3076,13 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.withCredentials = true;
       passwords: [],
       createPassword: false,
       user: null,
-      search: ''
+      search: ""
     };
   },
   mounted: function mounted() {
     this.getPasswords();
   },
-  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(['isAdmin'])), {}, {
+  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(["isAdmin"])), {}, {
     getPasswords: function getPasswords() {
       var _this = this;
 
@@ -2986,6 +3170,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.withCredentials = true;
 
@@ -2994,15 +3192,15 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.withCredentials = true;
   data: function data() {
     return {
       formData: {
-        email: '',
-        password: ''
+        email: "",
+        password: ""
       },
-      message: '',
+      message: "",
       nextButton: true
     };
   },
   mounted: function mounted() {},
-  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapMutations"])(['loggedIn', 'setUser'])), {}, {
+  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapMutations"])(["loggedIn", "setUser"])), {}, {
     handleLogin: function handleLogin() {
       var _this = this;
 
@@ -3016,11 +3214,9 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.withCredentials = true;
             _this.loggedIn();
 
             _this.$router.push({
-              path: 'home'
+              path: "home"
             });
           }
-
-          ;
         })["catch"](function (error) {
           _this.message = error.response.data.message;
         });
@@ -3042,6 +3238,53 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.withCredentials = true;
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _endpoints_endpoints_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../endpoints/endpoints.js */ "./resources/js/endpoints/endpoints.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3147,6 +3390,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _endpoints_endpoints__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../endpoints/endpoints */ "./resources/js/endpoints/endpoints.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -38834,13 +39089,7 @@ var render = function() {
                 selected: category.id === _vm.current.id ? true : false
               }
             },
-            [
-              _vm._v(
-                "\n                " +
-                  _vm._s(category.screen_name) +
-                  "\n            "
-              )
-            ]
+            [_vm._v("\n        " + _vm._s(category.screen_name) + "\n      ")]
           )
         }),
         0
@@ -39196,9 +39445,7 @@ var render = function() {
       ),
       _vm._v(" "),
       _c("div", { staticClass: "password-card-section" }, [
-        _vm._v(
-          "\n        " + _vm._s(_vm.password.category.screen_name) + "\n    "
-        )
+        _vm._v("\n    " + _vm._s(_vm.password.category.screen_name) + "\n  ")
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "password-card-section" }, [
@@ -39572,7 +39819,7 @@ var render = function() {
                           }
                         }
                       },
-                      [_vm._v("Ban")]
+                      [_vm._v("\n          Ban\n        ")]
                     )
                   : _vm._e(),
                 _vm._v(" "),
@@ -39588,14 +39835,14 @@ var render = function() {
                           }
                         }
                       },
-                      [_vm._v("unban")]
+                      [_vm._v("\n          unban\n        ")]
                     )
                   : _vm._e(),
                 _vm._v(" "),
                 _c(
                   "button",
                   {
-                    staticClass: "btn ",
+                    staticClass: "btn",
                     attrs: { href: "" },
                     on: {
                       click: function($event) {
@@ -39603,7 +39850,7 @@ var render = function() {
                       }
                     }
                   },
-                  [_vm._v("Delete")]
+                  [_vm._v("\n          Delete\n        ")]
                 )
               ],
               1
@@ -39729,18 +39976,20 @@ var render = function() {
                           ]
                         ),
                         _vm._v(" "),
-                        _c(
-                          "router-link",
-                          {
-                            attrs: { to: { name: "Admin" } },
-                            on: { click: this.closeNav }
-                          },
-                          [
-                            _c("span", { on: { click: this.closeNav } }, [
-                              _vm._v(" Admin")
-                            ])
-                          ]
-                        )
+                        _vm.isAdmin
+                          ? _c(
+                              "router-link",
+                              {
+                                attrs: { to: { name: "Admin" } },
+                                on: { click: this.closeNav }
+                              },
+                              [
+                                _c("span", { on: { click: this.closeNav } }, [
+                                  _vm._v(" Admin")
+                                ])
+                              ]
+                            )
+                          : _vm._e()
                       ],
                       1
                     )
@@ -39777,7 +40026,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("section", { staticClass: "activity-page" }, [
-    _c("div", { staticClass: "container " }, [
+    _c("div", { staticClass: "container" }, [
       _c("div", { staticClass: "activity-header" }, [
         _c("h3", { staticClass: "activity-header__title" }, [
           _vm._v("Actvity")
@@ -39820,7 +40069,7 @@ var render = function() {
               return _c(
                 "option",
                 { key: index, domProps: { value: user.id } },
-                [_vm._v(_vm._s(user.name))]
+                [_vm._v("\n          " + _vm._s(user.name) + "\n        ")]
               )
             })
           ],
@@ -39832,7 +40081,7 @@ var render = function() {
         !_vm.activities.length
           ? _c("div", {}, [
               _vm._v(
-                "\n                No Activity found for the current user.\n            "
+                "\n        No Activity found for the current user.\n      "
               )
             ])
           : _c(
@@ -39858,9 +40107,9 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                            " +
+                              "\n              " +
                                 _vm._s(activity.user.name) +
-                                "\n                        "
+                                "\n            "
                             )
                           ]
                         )
@@ -39883,9 +40132,9 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                            " +
+                              "\n              " +
                                 _vm._s(activity.password.name) +
-                                "\n                        "
+                                "\n            "
                             )
                           ]
                         )
@@ -40041,7 +40290,7 @@ var render = function() {
           : _vm._e()
       ]),
       _vm._v(" "),
-      _c("div", {}, [_vm._v("Create Permissions ")]),
+      _c("div", {}, [_vm._v("Create Permissions")]),
       _vm._v(" "),
       _c("div", {}, [_vm._v("Assign role fast area")])
     ])
@@ -40183,7 +40432,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Remove Password")]
+                    [_vm._v("\n              Remove Password\n            ")]
                   )
                 ])
               ])
@@ -40194,7 +40443,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "col-md-12" }, [
-        _vm._v("\n            Add Account to User\n            "),
+        _vm._v("\n      Add Account to User\n      "),
         _c(
           "select",
           {
@@ -40226,7 +40475,7 @@ var render = function() {
             return _c(
               "option",
               { key: index, domProps: { value: password.id } },
-              [_vm._v(_vm._s(password.name))]
+              [_vm._v("\n          " + _vm._s(password.name) + "\n        ")]
             )
           }),
           0
@@ -40314,11 +40563,7 @@ var render = function() {
                     staticClass: "btn",
                     on: { click: _vm.toggleCreatePassword }
                   },
-                  [
-                    _vm._v(
-                      "\n                    Fast create\n                "
-                    )
-                  ]
+                  [_vm._v("\n          Fast create\n        ")]
                 )
               : _vm._e(),
             _vm._v(" "),
@@ -40332,11 +40577,7 @@ var render = function() {
                 staticClass: "btn",
                 attrs: { to: { name: "Password-Create" } }
               },
-              [
-                _vm._v(
-                  "\n                    Create Password\n                "
-                )
-              ]
+              [_vm._v("\n          Create Password\n        ")]
             )
           ],
           1
@@ -40426,7 +40667,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("section", { staticClass: "login-page" }, [
     _c("div", { staticClass: "container login-page-container" }, [
-      _c("div", { staticClass: " login" }, [
+      _c("div", { staticClass: "login" }, [
         _c("h3", { staticClass: "login__title" }, [
           _vm._v("Log in to Ashlane")
         ]),
@@ -40516,9 +40757,7 @@ var render = function() {
               ? _c("div", {}, [
                   _c("div", { staticClass: "alert alert-danger" }, [
                     _vm._v(
-                      "\n                        " +
-                        _vm._s(_vm.message) +
-                        "\n\n                    "
+                      "\n            " + _vm._s(_vm.message) + "\n          "
                     )
                   ])
                 ])
@@ -58196,10 +58435,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_ACTIVITY", function() { return GET_ACTIVITY; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_SANCTUM", function() { return GET_SANCTUM; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "POST_LOGIN", function() { return POST_LOGIN; });
-var APP_URL = 'http://localhost:8000';
-var API_URL = 'http://localhost:8000/api'; // export const APP_URL = 'http://password-manager';
+var APP_URL = "http://localhost:8000";
+var API_URL = "http://localhost:8000/api"; // export const APP_URL = 'http://password-manager';
 // export const API_URL = 'http://password-manager/api';
-// Password 
+// Password
 
 var GET_PASSWORDS = "".concat(API_URL, "/passwords");
 var GET_ALLPASSWORDS = "".concat(API_URL, "/passwords-all");
@@ -58218,7 +58457,7 @@ var ADD_PASSWORD_TO_USER = "".concat(API_URL, "/add-password"); // Remove Passwo
 
 var REMOVE_PASSWORD_FROM_USER = "".concat(API_URL, "/remove-password"); // Categories
 
-var GET_CATEGORIES = "".concat(API_URL, "/categories"); // users 
+var GET_CATEGORIES = "".concat(API_URL, "/categories"); // users
 
 var CREATE_USER = "".concat(API_URL, "/users");
 var GET_USERS = "".concat(API_URL, "/users");
@@ -58234,14 +58473,14 @@ var BAN_USER = function BAN_USER(user) {
 var UNBAN_USER = function UNBAN_USER(user) {
   return "".concat(API_URL, "/users/").concat(user, "/unban");
 };
-var GET_LOGGED_IN_USER = "".concat(API_URL, "/user"); // Activity 
+var GET_LOGGED_IN_USER = "".concat(API_URL, "/user"); // Activity
 
 var GET_ACTIVITIES = "".concat(API_URL, "/activity");
 var GET_ACTIVITY = function GET_ACTIVITY(activity) {
   return "".concat(API_URL, "/activity/").concat(activity);
 }; // Auth
 
-var GET_SANCTUM = "".concat(APP_URL, "/sanctum/csrf-cookie"); // login 
+var GET_SANCTUM = "".concat(APP_URL, "/sanctum/csrf-cookie"); // login
 
 var POST_LOGIN = "".concat(APP_URL, "/login");
 

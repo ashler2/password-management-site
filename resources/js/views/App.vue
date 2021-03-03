@@ -1,15 +1,13 @@
 <template>
-    <div class="">
-        <navbar></navbar>
-        <router-view></router-view>
-    </div>
-
+  <div class="">
+    <navbar></navbar>
+    <router-view></router-view>
+  </div>
 </template>
 <script>
-    export default {
-        props:{
-            userId: Object
-        },
-
-    };
+export default {
+  props: {
+    userId: Object,
+  },
+};
 </script>

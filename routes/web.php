@@ -20,6 +20,9 @@ Route::get('/', function () {
 });
 Auth::routes();
 Route::post('/login', [LoginController::class, 'loginIfNotBanned']);
+Route::get('/login', function() {
+    return redirect('/');
+});
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

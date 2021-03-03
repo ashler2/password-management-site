@@ -10,6 +10,9 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 
+use App\Models\Role;
+use App\Models\Password;
+
 class User extends Authenticatable
 {
     use HasApiTokens;
@@ -27,6 +30,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role_id'
     ];
 
     /**
@@ -58,4 +62,14 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+
+    public function role(){
+        return $this->belongsTo(Role::class);
+    }
+
+    public function passwords(){
+        return $this->belongsToMany(Password::class, 'password_user', 'password_id');
+    }
+
 }

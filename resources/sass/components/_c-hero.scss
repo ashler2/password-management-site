@@ -1,0 +1,16 @@
+.c-hero {
+    @apply p-4 px-8 bg-white;
+
+    @screen md {
+        @apply py-8;
+    }
+
+    
+    &__title {
+        @apply mb-0;
+    }
+
+    &--no-px {
+        @apply px-0;
+    }
+}

@@ -1,0 +1,36 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600&display=swap');
+
+// Variables
+@import 'variables';
+
+// // Bootstrap
+// @import '~bootstrap/scss/bootstrap';
+
+// // Base
+@import './base';
+@import './typography';
+
+// Components
+
+@import './components/navbar';
+@import './components/password-card';
+@import './components/c-hero';
+
+// // Pages
+// @import './pages/login';
+// @import './pages/home';
+// @import './pages/activity';
+
+
+
+.c-create-popup {
+    position: absolute;
+
+}

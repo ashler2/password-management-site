@@ -3,7 +3,10 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Auth;
 
+use App\Http\Controllers\PasswordController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,6 +27,15 @@ Route::get('/', function () {
     ]);
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->name('dashboard');
+
+Route::middleware(['auth:sanctum', 'verified'])->group(function (){
+
+    Route::middleware(['can:isAdmin'])->group( function () {
+
+        // Route::get('/password/create', [PasswordController::class, 'create'])->name('password.create');
+        Route::resource('/password', PasswordController::class, ['except' => ['index']]);
+    });
+    Route::get('/dashboard', [PasswordController::class, 'index'])->name('dashboard');
+    Route::get('/password/{password}', [PasswordController::class, 'show'])->name('password.show');
+
+});

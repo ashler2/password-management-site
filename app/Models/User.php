@@ -72,4 +72,8 @@ class User extends Authenticatable
         return $this->belongsToMany(Password::class, 'password_user', 'password_id');
     }
 
+    public function isAdmin(){
+        return $this->role->id === 1 ? true : false;
+    }
+
 }

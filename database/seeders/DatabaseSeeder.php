@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
             RolesSeeder::class,
             UserSeeder::class,
             CategorySeeder::class,
-            // PasswordSeeder::class
+            PasswordSeeder::class
         ]);
     }
 }

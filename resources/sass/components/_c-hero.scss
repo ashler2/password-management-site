@@ -1,5 +1,5 @@
 .c-hero {
-    @apply p-4 px-8 bg-white;
+    @apply p-4 px-8 ;
 
     @screen md {
         @apply py-8;
@@ -8,6 +8,9 @@
     
     &__title {
         @apply mb-0;
+        font-size: 40px;
+        font-weight: 700;
+        color: $text-primary;
     }
 
     &--no-px {

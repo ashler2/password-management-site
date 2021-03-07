@@ -6,10 +6,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use App\Models\Password;
 use App\Models\Category;
+use App\Helpers\PasswordHelper;
+use App\Http\Resources\Password\PasswordResource;
+use App\Http\Requests\StorePasswordRequest;
 
 class PasswordController extends Controller
 {
@@ -26,7 +29,7 @@ class PasswordController extends Controller
             $passwords = Auth::user()->passwords;
         }
         return Inertia::render('Dashboard', [
-            'passwords' =>  $passwords
+            'passwords' =>  PasswordResource::collection($passwords)
         ]);
     }
 
@@ -37,9 +40,7 @@ class PasswordController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Password/PasswordCreate', [
-            'categories'    =>  Category::all()
-        ]);
+        return Inertia::render('Password/PasswordCreate');
     }
 
     /**
@@ -48,24 +49,25 @@ class PasswordController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePasswordRequest $request)
     {
-        $validated = $request->validate([
-            'name'  =>  'required',
-            'password'  =>  'required',
-            'category_id' => 'required'
-        ]);
-        $formattedURL = $this->formatWebsite($request->website);
+        if($request->website){
+            $formattedURL = PasswordHelper::formatWebsite($request->website);
+        } else {
+            $formattedUrl = null;
+        }
+
         $password = Password::create([
             'name'  =>  $request->name,
             'password'  =>  Crypt::encryptString($request->password),
+            "password_length"   => Crypt::encryptString(strlen($request->password)), "website_image_url"    =>  PasswordHelper::getPasswordFavicon($formattedURL),
             'email' => $request->email,
             'login' =>  $request->login,
             'website'   =>  $formattedURL,
-            "password_length"   => Crypt::encryptString(strlen($request->password)), "image_url"    =>  $this->getPasswordFavicon($formattedURL),
             'notes'     =>  $request->notes,
-            "category_id" =>   $request->category
+            "category_id" =>   $request->category_id
         ]);
+        return Redirect::route('password.show', $password);
     }
 
     /**
@@ -74,9 +76,11 @@ class PasswordController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Password $id)
+    public function show(Password $password)
     {
-        //
+          return Inertia::render('Password/PasswordSingle', [
+            'password'  =>  new PasswordResource($password)
+        ]);
     }
 
     /**
@@ -113,19 +117,4 @@ class PasswordController extends Controller
         //
     }
 
-
-
-    public function getPasswordFavicon ($url) {
-        $apiUrl = 'http://favicongrabber.com/api/grab/';
-        $response  = Http::get($apiUrl.$url);
-
-        return $response->json()['icons'][0]['src'];
-
-    }
-
-    public function formatWebsite($websiteURl){
-        $regex  = '/(?<=\/\/)(.*)/i';
-        preg_match($regex, $websiteURl,$matches, );
-        return $matches[0];
-    }
 }

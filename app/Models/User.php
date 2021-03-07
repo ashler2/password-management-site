@@ -69,7 +69,7 @@ class User extends Authenticatable
     }
 
     public function passwords(){
-        return $this->belongsToMany(Password::class, 'password_user', 'password_id');
+        return $this->belongsToMany(Password::class, 'password_user', 'user_id', );
     }
 
     public function isAdmin(){

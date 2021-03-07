@@ -1,10 +1,10 @@
 <template>
   <div>
-    <div class="min-h-screen bg-gray-100">
+    <div class="min-h-screen base">
         <navbar></navbar>
       <!-- Page Heading -->
-      
-      <header class="bg-white shadow" v-if="$slots.header">
+
+      <header class="" v-if="$slots.header">
         <div class="container">
           <slot name="header"></slot>
         </div>

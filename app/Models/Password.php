@@ -28,11 +28,11 @@ class Password extends Model
     
     protected $hidden = ["password"];
 
-    public function Category () {
-        return $this->hasOne(Category::class);
+    public function category () {
+        return $this->belongsTo(Category::class);
     }
 
-    public function Users() {
+    public function users() {
         return $this->belongsToMany(User::class, "password_user");
     }
 

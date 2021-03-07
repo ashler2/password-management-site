@@ -32721,24 +32721,6 @@ select{
           animation: bounce 1s infinite;
 }
 
-.btn {
-  background-color: #0E6476;
-  color: #ffffff;
-  font-size: 18px;
-  padding: 10px 30px;
-  margin-top: 20px;
-  transition: ease 0.4s;
-}
-
-.btn:hover {
-  color: #ffffff;
-  background-color: #0e353d;
-}
-
-.btn--full {
-  width: 100%;
-}
-
 .form-section {
   margin-bottom: 20px;
 }
@@ -32794,6 +32776,10 @@ section, .section {
   flex-wrap: wrap;
   margin-right: -15px;
   margin-left: -15px;
+}
+
+.base {
+  background-color: #D9E6E9;
 }
 
 h1, .h1,
@@ -32866,6 +32852,7 @@ select:focus {
 .navbar a {
   color: #ffffff;
   font-family: "Arimo", sans-serif;
+  font-weight: 700;
   margin: 0 0;
 }
 
@@ -33037,8 +33024,6 @@ select:focus {
 }
 
 .c-hero {
-  --tw-bg-opacity: 1;
-  background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
   padding: 1rem;
   padding-left: 2rem;
   padding-right: 2rem;
@@ -33053,11 +33038,69 @@ select:focus {
 
 .c-hero__title {
   margin-bottom: 0px;
+  font-size: 40px;
+  font-weight: 700;
+  color: #0E353D;
 }
 
 .c-hero--no-px {
   padding-left: 0px;
   padding-right: 0px;
+}
+
+.c-list-card {
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: #F5F7F7;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+.c-list-card-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.c-list-card-section-first img {
+  width: 50px;
+  height: 100%;
+}
+
+.c-list-card-section-first__content {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  flex-direction: column;
+  margin-left: 15px;
+}
+
+.btn {
+  background-color: #0E6476;
+  color: #ffffff;
+  font-size: 18px;
+  padding: 10px 30px;
+  margin-top: 20px;
+  transition: ease 0.4s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn:hover {
+  color: #ffffff;
+  background-color: #0e353d;
+  text-decoration: none;
+}
+
+.btn--full {
+  width: 100%;
+}
+
+.btn--mt0 {
+  margin-top: 0;
 }
 
 .c-create-popup {

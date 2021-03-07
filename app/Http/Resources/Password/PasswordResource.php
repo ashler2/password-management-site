@@ -28,7 +28,7 @@ class PasswordResource extends JsonResource
             'password_length'       =>  Crypt::decryptString($this->password_length),
             'category'              =>  $this->category,
             'website_img'           =>  $this->image_url,
-            // 'last_used'             =>  Activity::where('password_id', $this->id)->orderBy('viewed_at', 'desc')->limit(1)->get()
+            'last_used'             =>  Activity::where('password_id', $this->id)->orderBy('viewed_at', 'desc')->limit(1)->first()
             // SELECT * FROM activities WHERE `password_id` = 21 ORDER BY viewed_at DESC LIMIT 1;
         ];
     }
